@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('breadcrumb')
+    <x-breadcrumb :links="[
+        [
+            'label' => 'Dashboard',
+            'active' => false,
+            'link' => '/home',
+        ]
+    ]"></x-breadcrumb>
+@endsection
+
 @section('content')
 <div class="body flex-grow-1 px-3">
     <div class="container-lg">

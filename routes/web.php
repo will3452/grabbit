@@ -18,15 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// logout
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect(route('login'));
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// logout
-Route::get('/logout', function () {
-    Auth::logout();
-    return back();
-});
+
 
 // comments
 Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(function () {
