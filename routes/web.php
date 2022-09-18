@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/logout', function () {
     Auth::logout();
     return back();
+});
+
+// comments
+Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(function () {
+    Route::post('/', [CommentController::class])->name('new');
+    Route::delete('/{comment}', [CommentController::class])->name('remove');
 });
