@@ -8,7 +8,7 @@
             <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
           </svg> Dashboard</a></li>
 
-          @env('local')
+          @if(env('UI_HELPER'))
           <li class="nav-title">Theme</li>
           <li class="nav-item"><a class="nav-link" href="colors.html">
               <svg class="nav-icon">
@@ -120,7 +120,7 @@
                   </svg> Error 500</a></li>
             </ul>
           </li>
-          @endenv
+          @endif
     </ul>
     <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
   </div>
