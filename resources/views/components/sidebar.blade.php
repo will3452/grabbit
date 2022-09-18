@@ -8,6 +8,14 @@
             <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
           </svg> Dashboard</a></li>
 
+     <li>
+        <a class="nav-link" href="/posts">
+            <svg class="nav-icon">
+              <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-globe-alt"></use>
+            </svg> Market
+        </a>
+     </li>
+
           @if(env('UI_HELPER'))
           <li class="nav-title">Theme</li>
           <li class="nav-item"><a class="nav-link" href="colors.html">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,4 +35,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(function () {
     Route::post('/', [CommentController::class])->name('new');
     Route::delete('/{comment}', [CommentController::class])->name('remove');
+});
+
+
+Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () {
+    Route::get('/', [PostController::class, 'index'])->name('index');
+    Route::post('/', [PostController::class, 'store'])->name('store');
 });

@@ -58,6 +58,7 @@
     </script>
   </head>
   <body>
+
     <x-sidebar></x-sidebar>
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
       <header class="header header-sticky mb-4">
@@ -140,6 +141,11 @@
       </header>
       <div class="body flex-grow-1 px-3">
         <div class="container-lg">
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{session()->get('success')}}
+                </div>
+            @endif
             @yield('content')
         </div>
       </div>
