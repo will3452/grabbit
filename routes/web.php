@@ -23,6 +23,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // logout
 Route::get('/logout', function () {
-    auth()->logout();
+    Auth::logout();
     return back();
 });
