@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,4 +42,11 @@ Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(functi
 Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::post('/', [PostController::class, 'store'])->name('store');
+});
+
+
+//prorile
+Route::name('profile.')->middleware(['auth'])->prefix('/profile')->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('index');
+    Route::patch('/{user_id}', [ProfileController::class, 'update'])->name('index');
 });
