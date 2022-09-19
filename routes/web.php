@@ -48,7 +48,5 @@ Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () 
 //notification
 Route::name('notification.')->middleware(['auth'])->prefix('/notification')->group(function () {
     Route::get('/', [NotificationController::class, 'index'])->name('index');
-    Route::delete('/{data}', [NotificationController::class, 'destroy'])->name('destroy');
-    // Route::post('/', [NotificationController::class, 'store'])->name('store');
     Route::get('/{data}', [NotificationController::class, 'show'])->name('show');
 });

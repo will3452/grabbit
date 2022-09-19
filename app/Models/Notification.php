@@ -21,4 +21,9 @@ class Notification extends Model
         return $this->belongsTo(User::class);
         
     }
+    public function create_notification($data_notf){
+
+        return auth()->user()->notification()->create($data_notf);
+        
+    }
 }
