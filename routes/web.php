@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,9 +46,13 @@ Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () 
     Route::post('/', [PostController::class, 'store'])->name('store');
 });
 
-
 //prorile
 Route::name('profile.')->middleware(['auth'])->prefix('/profile')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('index');
     Route::patch('/{user_id}', [ProfileController::class, 'update'])->name('index');
+});
+//notification
+Route::name('notification.')->middleware(['auth'])->prefix('/notification')->group(function () {
+    Route::get('/', [NotificationController::class, 'index'])->name('index');
+    Route::get('/{data}', [NotificationController::class, 'show'])->name('show');
 });
