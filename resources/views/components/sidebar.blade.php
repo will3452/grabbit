@@ -15,6 +15,14 @@
             </svg> Market
         </a>
      </li>
+     <li>
+      <a class="nav-link" href="/profile">
+          <svg class="nav-icon">
+            <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
+          </svg> Profile
+      </a>
+     </li>
+
 
           @if(env('UI_HELPER'))
           <li class="nav-title">Theme</li>
