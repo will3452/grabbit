@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,4 +43,12 @@ Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(functi
 Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::post('/', [PostController::class, 'store'])->name('store');
+});
+
+//notification
+Route::name('notification.')->middleware(['auth'])->prefix('/notification')->group(function () {
+    Route::get('/', [NotificationController::class, 'index'])->name('index');
+    Route::delete('/{data}', [NotificationController::class, 'destroy'])->name('destroy');
+    // Route::post('/', [NotificationController::class, 'store'])->name('store');
+    Route::get('/{data}', [NotificationController::class, 'show'])->name('show');
 });
