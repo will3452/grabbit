@@ -9,8 +9,18 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index (Request $request) {
-        $posts = Post::latest()->take(25)->get();
-        return view('posts.index', compact('posts'));
+
+        $data = $request->search;
+
+        if($data){
+            $posts = Post::where('title', 'like','%'.$data.'%')->latest()->get();
+            return view('posts.index', compact('posts', 'data'));
+        }else{
+            $data = null;
+            $posts = Post::latest()->take(25)->get();
+            return view('posts.index', compact('posts', 'data'));
+        }
+        
     }
 
     public function store (Request $request) {

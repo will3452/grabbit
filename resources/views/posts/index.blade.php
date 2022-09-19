@@ -35,6 +35,19 @@
             </div>
         </form>
     </div>
+    <div class="card mt-3">
+        <div class="card-header">Search Post</div>
+        <form class="card-body" method="GET" action="">
+            <div class="form-group">
+                <input name="search" type="text" class="form-control" value="{{ $data }}" placeholder="Search...">
+            </div>
+            <div class="mt-2 form-group" style="text-align:right !important;">
+                <button type="submit" class="btn btn-primary">
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
     @foreach ($posts as $post)
         <div class="card mt-2">
             <div class="card-header">
