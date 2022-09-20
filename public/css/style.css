@@ -14108,3 +14108,7 @@ html:not([dir=rtl]) .wrapper {
   background: none;
   padding:0;
 }
+.color_like{
+  color:blue;
+  font-weight:700;
+}

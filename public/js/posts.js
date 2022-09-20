@@ -11,14 +11,12 @@ $(document).ready(function(){
             success:function(data){
 
                 if(data.messages=='like'){
-                    $('.like_'+data.id_back).addClass('hide_like_unlike');
-                    $('.unlike_'+data.id_back).removeClass('hide_like_unlike');
+                    $('.like_'+data.id_back).addClass('color_like');
                     var like = $('.totallike_'+data.id_back).text();
                     var convert = parseInt(like) + 1;
                     $('.totallike_'+data.id_back).text(convert);;
                 }else if(data.messages=='unlike'){
-                    $('.unlike_'+data.id_back).addClass('hide_like_unlike');
-                    $('.like_'+data.id_back).removeClass('hide_like_unlike');
+                    $('.like_'+data.id_back).removeClass('color_like');
                     var like = $('.totallike_'+data.id_back).text();
                     var convert = parseInt(like) - 1;
                     $('.totallike_'+data.id_back).text(convert);;

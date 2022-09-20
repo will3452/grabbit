@@ -72,21 +72,11 @@
                             @csrf
                             <input type="hidden" value="{{$post->id}}" name="likeinput">
                             <button type="submit" class="remove_outline_button">
-                                @if ($post->check_like_by_user($post->id))
-                                    <svg class="icon me-2 {{'unlike_'.$post->id}}">
-                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-down"></use>
-                                    </svg>
-                                    <svg class="icon me-2 hide_like_unlike {{'like_'.$post->id}}">
+                               
+                                    <svg class="icon me-2  @if ($post->check_like_by_user($post->id)) color_like @endif {{'like_'.$post->id}}">
                                         <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-up"></use>
                                     </svg>
-                                @else
-                                    <svg class="icon me-2 {{'like_'.$post->id}}">
-                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-up"></use>
-                                    </svg>
-                                    <svg class="icon me-2 hide_like_unlike {{'unlike_'.$post->id}}">
-                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-down"></use>
-                                    </svg>
-                                @endif
+                               
                             </button>
                         </form>
                 </div>
