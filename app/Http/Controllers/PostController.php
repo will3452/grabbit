@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use App\Models\Post;
+use App\Models\Like;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -19,6 +20,7 @@ class PostController extends Controller
             $data = null;
             $posts = Post::latest()->take(25)->get();
             return view('posts.index', compact('posts', 'data'));
+         
         }
         
     }

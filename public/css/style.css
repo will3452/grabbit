@@ -14106,4 +14106,5 @@ html:not([dir=rtl]) .wrapper {
 .remove_outline_button{
   border:none;
   background: none;
+  padding:0;
 }

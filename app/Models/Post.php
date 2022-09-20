@@ -24,7 +24,13 @@ class Post extends Model
         return $like;
 
     }
+    public function calculate_like($post_id){
 
+        $count = Like::where('post_id', $post_id)->count();
+
+        return $count;
+
+    }
     public function user () {
         return $this->belongsTo(User::class);
     }

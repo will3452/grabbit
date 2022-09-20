@@ -67,7 +67,8 @@
             </div>
             <div class="card-footer">
                 <div>
-                        <form class="likeform" method="POST">
+                        <form class="likeform d-flex" method="POST">
+                            <div class="{{'totallike_'.$post->id}} p-1">{{$post->calculate_like($post->id)}}</div>
                             @csrf
                             <input type="hidden" value="{{$post->id}}" name="likeinput">
                             <button type="submit" class="remove_outline_button">

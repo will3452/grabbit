@@ -13,11 +13,15 @@ $(document).ready(function(){
                 if(data.messages=='like'){
                     $('.like_'+data.id_back).addClass('hide_like_unlike');
                     $('.unlike_'+data.id_back).removeClass('hide_like_unlike');
-                    console.log(data);
+                    var like = $('.totallike_'+data.id_back).text();
+                    var convert = parseInt(like) + 1;
+                    $('.totallike_'+data.id_back).text(convert);;
                 }else if(data.messages=='unlike'){
                     $('.unlike_'+data.id_back).addClass('hide_like_unlike');
                     $('.like_'+data.id_back).removeClass('hide_like_unlike');
-                    console.log(data);
+                    var like = $('.totallike_'+data.id_back).text();
+                    var convert = parseInt(like) - 1;
+                    $('.totallike_'+data.id_back).text(convert);;
                 }
             }
         });
