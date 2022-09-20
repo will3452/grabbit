@@ -70,13 +70,13 @@
                         <form class="likeform d-flex" method="POST">
                             <div class="{{'totallike_'.$post->id}} p-1">{{$post->calculate_like($post->id)}}</div>
                             @csrf
-                            <input type="hidden" value="{{$post->id}}" name="likeinput">
+                            <input class="post-{{$post->id}}" type="hidden" value="{{$post->id}}" name="likeinput">
                             <button type="submit" class="remove_outline_button">
-                               
+
                                     <svg class="icon me-2  @if ($post->check_like_by_user($post->id)) color_like @endif {{'like_'.$post->id}}">
                                         <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-up"></use>
                                     </svg>
-                               
+
                             </button>
                         </form>
                 </div>
