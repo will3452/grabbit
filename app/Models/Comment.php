@@ -15,4 +15,8 @@ class Comment extends Model
         'value',
         'user_id',
     ];
+
+    public function model () {
+        return $this->morphTo();
+    }
 }

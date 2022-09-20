@@ -37,8 +37,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // comments
 Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(function () {
-    Route::post('/', [CommentController::class])->name('new');
-    Route::delete('/{comment}', [CommentController::class])->name('remove');
+    Route::post('/', [CommentController::class, 'addComment'])->name('new');
+    Route::delete('/{comment}', [CommentController::class, 'removeComment'])->name('remove');
 });
 
 

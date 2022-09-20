@@ -29,4 +29,23 @@ $(document).ready(function(){
             }
         });
     });
+
+    $(".comment-form").on('submit', function(e){
+        let payload = new FormData(this)
+        $(this).hide()
+        let form = this
+        e.preventDefault();
+        $.ajax({
+            url:'/comments',
+            method:'POST',
+            data:payload,
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            success:function(data){
+                console.log(data)
+                $(form).show()
+            }
+        });
+    });
   });
