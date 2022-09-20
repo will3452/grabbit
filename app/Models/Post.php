@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Post extends Model
 {
@@ -15,7 +15,21 @@ class Post extends Model
         'attachments',
     ];
 
+    public function check_like_by_user($post_id){ //check if user already like
+
+        $userId = auth()->user()->id;
+
+        $like = Like::where('user_id', $userId)->where('post_id', $post_id)->first();
+
+        return $like;
+
+    }
+
     public function user () {
         return $this->belongsTo(User::class);
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 }

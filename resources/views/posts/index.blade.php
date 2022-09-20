@@ -65,6 +65,23 @@
                     {{$post->descriptions}}
                 </div>
             </div>
+            <div class="card-footer">
+                <div>
+                    @if ($post->check_like_by_user($post->id))
+                        <a href="like/delete/{{$post->id}}">
+                            <button class="btn btn-primary m-2" id="follow">
+                                Unlike
+                            </button>
+                        </a>
+                    @else
+                        <a href="like/{{$post->id}}">
+                            <button class="btn btn-primary m-2" id="follow">
+                                like
+                            </button>
+                        </a>
+                    @endif
+                </div>
+            </div>
         </div>
     @endforeach
 @endsection

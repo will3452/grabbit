@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -44,6 +45,12 @@ Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(functi
 Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::post('/', [PostController::class, 'store'])->name('store');
+});
+
+//like
+Route::name('like.')->middleware(['auth'])->prefix('/like')->group(function () {
+    Route::get('/{id}', [LikeController::class, 'store'])->name('store');
+    Route::get('/delete/{id}', [LikeController::class, 'destroy'])->name('destroy');
 });
 
 //prorile
