@@ -8,53 +8,36 @@ use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-    private function like_data($post_id){ 
-
-       return [
-            'user_id' => auth()->user()->id,
-            'post_id' => $post_id
-        ];
-        
-    }
-
-    private function check_auth_like($data){
-
-        return Like::where('user_id', $data['user_id'])->where('post_id', $data['post_id'])->first();
-    }
-
     public function store(Request $request){
 
-        $data = $this->like_data($request->id);
+        $data = auth()->user()->likes()->where('post_id', $request->input('likeinput'))->first();
 
-        $check = $this->check_auth_like($data);
+        if($data){
 
-        if($check){
+            $data->delete();
 
-            return back();
+            return response()->json(
+                [
+                    'status'=>200,
+                    'messages'=> 'unlike',
+                    'id_back' => $request->input('likeinput')
+                ]
+            );
         }
         else{
+            
+            auth()->user()->likes()->create([
+                'post_id' => $request->input('likeinput')
+            ]);
 
-            Like::create($data);
-
-            return back()->withSuccess('Like Added!');
+            return response()->json(
+                [
+                    'status'=>200,
+                    'messages'=> 'like',
+                    'id_back' => $request->input('likeinput')
+                ]
+            );
         }
-    }
-    public function destroy(Request $request){
 
-        $data = $this->like_data($request->id);
-
-        $check = $this->check_auth_like($data);
-
-        if($check->count()>0){
-
-            $check->delete(); //delete
-
-            return back()->withSuccess('Unlike');
-        }
-        else{
-
-            return back();
-
-        }
     }
 }

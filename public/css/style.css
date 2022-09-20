@@ -14099,3 +14099,11 @@ html:not([dir=rtl]) .wrapper {
   border: 1px solid #787878;
   font-weight: 600;
 }
+
+.hide_like_unlike{
+  display:none;
+}
+.remove_outline_button{
+  border:none;
+  background: none;
+}

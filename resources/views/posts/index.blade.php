@@ -67,21 +67,30 @@
             </div>
             <div class="card-footer">
                 <div>
-                    @if ($post->check_like_by_user($post->id))
-                        <a href="like/delete/{{$post->id}}">
-                            <button class="btn btn-primary m-2" id="follow">
-                                Unlike
+                        <form class="likeform" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{$post->id}}" name="likeinput">
+                            <button type="submit" class="remove_outline_button">
+                                @if ($post->check_like_by_user($post->id))
+                                    <svg class="icon me-2 {{'unlike_'.$post->id}}">
+                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-down"></use>
+                                    </svg>
+                                    <svg class="icon me-2 hide_like_unlike {{'like_'.$post->id}}">
+                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-up"></use>
+                                    </svg>
+                                @else
+                                    <svg class="icon me-2 {{'like_'.$post->id}}">
+                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-up"></use>
+                                    </svg>
+                                    <svg class="icon me-2 hide_like_unlike {{'unlike_'.$post->id}}">
+                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-down"></use>
+                                    </svg>
+                                @endif
                             </button>
-                        </a>
-                    @else
-                        <a href="like/{{$post->id}}">
-                            <button class="btn btn-primary m-2" id="follow">
-                                like
-                            </button>
-                        </a>
-                    @endif
+                        </form>
                 </div>
             </div>
         </div>
     @endforeach
+    <script src="{{ asset('js/posts.js') }}" defer></script>
 @endsection

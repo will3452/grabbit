@@ -49,8 +49,7 @@ Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () 
 
 //like
 Route::name('like.')->middleware(['auth'])->prefix('/like')->group(function () {
-    Route::get('/{id}', [LikeController::class, 'store'])->name('store');
-    Route::get('/delete/{id}', [LikeController::class, 'destroy'])->name('destroy');
+    Route::post('/', [LikeController::class, 'store'])->name('store');
 });
 
 //prorile
