@@ -15,18 +15,18 @@ class Post extends Model
         'attachments',
     ];
 
-    public function check_like_by_user($post_id){ //check if user already like
+    public function check_like_by_user(){ //check if user already like
 
         $userId = auth()->user()->id;
 
-        $like = Like::where('user_id', $userId)->where('post_id', $post_id)->first();
+        $like = Like::where('user_id', $userId)->where('post_id', $this->id)->first();
 
         return $like;
 
     }
-    public function calculate_like($post_id){
+    public function calculate_like(){
 
-        $count = Like::where('post_id', $post_id)->count();
+        $count = Like::where('post_id', $this->id)->count();
 
         return $count;
 
