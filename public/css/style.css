@@ -14109,7 +14109,7 @@ html:not([dir=rtl]) .wrapper {
   padding:0;
 }
 .color_like{
-  color:blue;
+  color:var(--cui-blue);
   font-weight:700;
 }
 .outline-none{
