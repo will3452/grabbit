@@ -50,6 +50,25 @@
     </div>
     @foreach ($posts as $post)
         <div class="card mt-2">
+            <div class="card-header d-flex align-items-baseline">
+                <div class="p-1">{{ucfirst($post->get_user_post($post->user_id)->name)}}</div>
+                @if (!$post->check_user_auth_post())
+                    <form class="followform p-1" method="POST">
+                        @csrf
+                        <input type="hidden" value="{{$post->get_profile_post($post->user_id)->id}}" name="following_id">
+                        
+                        @if ($post->check_user_follow_status($post->get_profile_post($post->user_id)->id))
+                            <button class="btn btn-primary {{'followbtn_'.$post->get_profile_post($post->user_id)->id}}" type="submit">Unfollow</button>
+                        @else
+                            <button class="btn btn-primary {{'followbtn_'.$post->get_profile_post($post->user_id)->id}}" type="submit">Follow</button>
+                        @endif
+                       
+
+                    </form>
+                @else
+                    <div>{{ '(me)'}}</div>
+                @endif
+            </div>
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div>
@@ -73,7 +92,7 @@
                             <input type="hidden" value="{{$post->id}}" name="likeinput">
                             <button type="submit" class="remove_outline_button">
                                
-                                    <svg class="icon me-2  @if ($post->check_like_by_user($post->id)) color_like @endif {{'like_'.$post->id}}">
+                                    <svg class="icon me-2  @if ($post->check_like_by_user()) color_like @endif {{'like_'.$post->id}}">
                                         <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-up"></use>
                                     </svg>
                                

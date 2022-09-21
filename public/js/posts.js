@@ -24,4 +24,27 @@ $(document).ready(function(){
             }
         });
     });
-  });
+
+    $(".followform").on('submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            url:'/follows',
+            method:'POST',
+            data:new FormData(this),
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            success:function(data){
+
+                if(data.messages=='Follow'){
+
+                    $('.followbtn_'+data.followed_id).text('Unfollow')
+                    console.log(data);
+                }else if(data.messages=='Unfollow'){
+                    $('.followbtn_'+data.unfollowed_id).text('Follow')
+                    console.log(data);
+                }
+            }
+        });
+    });
+});
