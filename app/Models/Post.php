@@ -19,14 +19,14 @@ class Post extends Model
 
         $userId = auth()->user()->id;
 
-        $like = Like::where('user_id', $userId)->where('post_id', $this->id)->first();
+        $like = Like::whereUserId($userId)->wherePostId($this->id)->first();
 
         return $like;
 
     }
     public function calculate_like(){
 
-        $count = Like::where('post_id', $this->id)->count();
+        $count = Like::wherePostId($this->id)->count();
 
         return $count;
 
