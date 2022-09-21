@@ -51,16 +51,16 @@
     @foreach ($posts as $post)
         <div class="card mt-2">
             <div class="card-header d-flex align-items-baseline">
-                <div class="p-1">{{ucfirst($post->get_user_post($post->user_id)->name)}}</div>
+                    <div>{{ucfirst($post->get_user_post($post->user_id)->name)}}</div>
                 @if (!$post->check_user_auth_post())
-                    <form class="followform p-1" method="POST">
+                    <form class="followform " method="POST">
                         @csrf
                         <input type="hidden" value="{{$post->get_profile_post($post->user_id)->id}}" name="following_id">
                         
                         @if ($post->check_user_follow_status($post->get_profile_post($post->user_id)->id))
-                            <button class="btn btn-primary {{'followbtn_'.$post->get_profile_post($post->user_id)->id}}" type="submit">Unfollow</button>
+                            <button class="btn-link outline-none {{'followbtn_'.$post->get_profile_post($post->user_id)->id}}"  type="submit">Unfollow</button>
                         @else
-                            <button class="btn btn-primary {{'followbtn_'.$post->get_profile_post($post->user_id)->id}}" type="submit">Follow</button>
+                            <button class="btn-link outline-none {{'followbtn_'.$post->get_profile_post($post->user_id)->id}}" type="submit">Follow</button>
                         @endif
                        
 
