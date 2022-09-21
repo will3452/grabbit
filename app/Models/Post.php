@@ -15,7 +15,7 @@ class Post extends Model
         'attachments',
     ];
 
-    public function check_like_by_user(){ //check if user already like
+    public function checkLikeByUser(){ //check if user already like
 
         $userId = auth()->user()->id;
 
@@ -24,13 +24,17 @@ class Post extends Model
         return $like;
 
     }
-    public function check_user_follow_status($userid){
+    public function checkUserFollowStatus(){ //check user follow status on other user
 
-        $follow = Follow::whereFollowerId(auth()->user()->id)->whereFollowingId($userid)->count();
+        $profile = $this->getProfilePost($this->user_id);
+
+        $profile_id = $profile->id;
+
+        $follow = Follow::whereFollowerId(auth()->user()->id)->whereFollowingId($profile_id)->count();
 
         return $follow;
     }
-    public function check_user_auth_post(){
+    public function checkUserAuthPost(){ //check post if posted by auth user
 
         $userId = auth()->user()->id;
 
@@ -38,21 +42,21 @@ class Post extends Model
 
         return $post;
     }
-    public function get_user_post($userid){
+    public function getUserPost(){ //get user data of post user
 
-        $user = User::whereId($userid)->first();
+        $user = User::whereId($this->user_id)->first();
 
         return $user;
     }
-    public function get_profile_post($userid){
+    public function getProfilePost(){ //get profile of the poser
         
-        $profile = Profile::whereUserId($userid)->first();
+        $profile = Profile::whereUserId($this->user_id)->first();
 
         return $profile;
     }
-    public function calculate_like($post_id){
+    public function calculateLike(){ //calculate totla like
 
-        $count = Like::where('post_id', $post_id)->count();
+        $count = Like::wherePostId($this->id)->count();
 
         return $count;
 
