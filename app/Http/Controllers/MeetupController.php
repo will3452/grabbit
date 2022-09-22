@@ -21,7 +21,15 @@ class MeetupController extends Controller
 
             if($posts){
 
-                return view('meetup.create', compact('posts'));
+                if(!$posts->checkUserAuthPost()){
+
+                    return view('meetup.create', compact('posts'));
+
+                }else{
+
+                    return redirect('/posts');
+                }
+
             }
             else{
 
@@ -46,10 +54,6 @@ class MeetupController extends Controller
             ]
         );
         
-
-
-
-
         if($data->fails()){
 
             return response()->json(
@@ -68,14 +72,33 @@ class MeetupController extends Controller
 
             if($posts){
                 
-                $meetup->create($request->all());
+                //check if user have already meetup
 
-                return response()->json(
-                    [
-                         'status'=>204,
-                         'messages'=>'success'
-                    ]
-                );
+                $check = $meetup->whereRequestorId($request['requestor_id'])->whereApproverId($request['approver_id'])->wherePostId($request->input('post_id'))->first();
+
+               
+
+               if($check){
+                    return response()->json(
+                        [
+                            'status'=>404,
+                            'messages'=>'You Already Set Meeting Up On this Post'
+                        ]
+                    );
+               }else{
+
+                     $meetup->create($request->all());
+
+                     return response()->json(
+                        [
+                            'status'=>204,
+                            'messages'=>'success'
+                        ]
+                    );
+
+               }
+
+              
             }else{
                 return response()->json(
                     [
@@ -86,5 +109,18 @@ class MeetupController extends Controller
             }
 
         }
+    }
+
+    public function cancel(){
+
+
+    }
+    public function approved(){
+
+
+    }
+    public function index(){
+
+        
     }
 }

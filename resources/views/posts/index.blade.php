@@ -72,7 +72,9 @@
                     @endif
                 </div>
                 <div>
-                    <a href="{{url('meetup/create')}}/{{$post->id}}" class="btn btn-outline-primary">Meetup Request</a>
+                    @if (!$post->checkUserAuthPost())
+                        <a href="{{url('meetup/create')}}/{{$post->id}}" class="btn btn-outline-primary">Meetup Request</a>
+                    @endif
                 </div>
             </div>
             <div class="card-header">

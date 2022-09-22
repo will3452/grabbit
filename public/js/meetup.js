@@ -42,9 +42,12 @@ $(document).ready(function(){
                         .removeClass('is-valid')
                     $(".remarks").text('')
                     console.log(data);
+                    $(".btn-primary").text('Create Meetup');
                 }
                 else{
                     console.log(data);
+                    $(".btn-primary").text('Create Meetup');
+                    alert(data.messages);
                 }
              
             }

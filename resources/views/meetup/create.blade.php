@@ -18,7 +18,7 @@
 
     <div class="card">
         <div class="card-header">Meetup Request Form</div>
-        <form class="card-body" id="create_meetup" method="post" action="/meetup">
+        <form class="card-body" id="create_meetup">
             @csrf
             <div class="form-group">
                 <p><b>Post:</b> {{$posts->title}}</p>
@@ -45,5 +45,5 @@
             </div>
         </form>
     </div>
-    {{-- <script src="{{ asset('js/meetup.js') }}" defer></script> --}}
+    <script src="{{ asset('js/meetup.js') }}" defer></script>
 @endsection
