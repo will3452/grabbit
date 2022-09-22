@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Follow extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'follower_id',
+        'following_id',
+    ];
+    public function profile(){
+
+        return $this->belongsTo(Profile::class);
+        
+    }
 }
