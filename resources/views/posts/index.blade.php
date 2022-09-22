@@ -56,14 +56,14 @@
                 <form class="followform " method="POST">
                     @csrf
                     <input type="hidden" value="{{$post->getProfilePost()->id}}" name="following_id">
-                    
+
                     @if ($post->checkUserFollowStatus())
                         <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">Unfollow</button>
                     @else
                         <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">Follow</button>
                     @endif
 
-                   
+
 
                 </form>
                 @else
@@ -83,6 +83,9 @@
             <div class="card-body">
                 <div>
                     {{$post->descriptions}}
+                </div>
+                <div>
+                    <a target="_blank" href="{{$post->getPublicImage()}}"><img style="max-height:300px !important;" src="{{$post->getPublicImage()}}" alt=""></a>
                 </div>
                 <hr>
                 <form class="likeform d-flex" method="POST">

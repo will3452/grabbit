@@ -49,7 +49,7 @@ class Post extends Model
         return $user;
     }
     public function getProfilePost(){ //get profile of the poser
-        
+
         $profile = Profile::whereUserId($this->user_id)->first();
 
         return $profile;
@@ -71,5 +71,10 @@ class Post extends Model
 
     public function getCommentsCount () {
         return Comment::whereModelType('\\App\\Models\\Post')->whereModelId($this->id)->count();
+    }
+
+    public function getPublicImage() {
+        $arr = explode('/', $this->attachments);
+        return "/storage/" . $arr[1];
     }
 }
