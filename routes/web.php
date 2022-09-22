@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\MeetupController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -67,4 +68,10 @@ Route::name('notification.')->middleware(['auth'])->prefix('/notification')->gro
 //follow
 Route::name('follow.')->middleware(['auth'])->prefix('/follows')->group(function () {
     Route::post('/', [FollowController::class, 'store'])->name('store');
+});
+
+//meetup
+Route::name('meetup.')->middleware(['auth'])->prefix('/meetup')->group(function () {
+    Route::get('/create/{id_post}', [MeetupController::class, 'create'])->name('create');
+    Route::post('/', [MeetupController::class, 'store'])->name('store');
 });

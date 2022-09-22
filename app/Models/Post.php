@@ -68,8 +68,10 @@ class Post extends Model
     public function likes(){
         return $this->hasMany(Like::class);
     }
-
     public function getCommentsCount () {
         return Comment::whereModelType('\\App\\Models\\Post')->whereModelId($this->id)->count();
+    }
+    public function meetups(){
+        return $this->hasMany(Meetup::class);
     }
 }

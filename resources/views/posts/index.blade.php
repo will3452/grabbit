@@ -50,25 +50,30 @@
     </div>
     @foreach ($posts as $post)
         <div class="card mt-2">
-            <div class="card-header d-flex align-items-baseline">
-                <div>{{ucfirst($post->getUserPost()->name)}}</div>
-                @if (!$post->checkUserAuthPost())
-                <form class="followform " method="POST">
-                    @csrf
-                    <input type="hidden" value="{{$post->getProfilePost()->id}}" name="following_id">
+            <div class="card-header d-flex justify-content-between align-items-baseline">
+                <div class="d-flex align-items-baseline">
+                    <div>{{ucfirst($post->getUserPost()->name)}}</div>
+                    @if (!$post->checkUserAuthPost())
+                    <form class="followform " method="POST">
+                        @csrf
+                        <input type="hidden" value="{{$post->getProfilePost()->id}}" name="following_id">
+                        
+                        @if ($post->checkUserFollowStatus())
+                            <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">Unfollow</button>
+                        @else
+                            <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">Follow</button>
+                        @endif
+
                     
-                    @if ($post->checkUserFollowStatus())
-                        <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">Unfollow</button>
+
+                    </form>
                     @else
-                        <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">Follow</button>
+                        <div>{{ '(me)'}}</div>
                     @endif
-
-                   
-
-                </form>
-                @else
-                    <div>{{ '(me)'}}</div>
-                @endif
+                </div>
+                <div>
+                    <a href="{{url('meetup/create')}}/{{$post->id}}" class="btn btn-outline-primary">Meetup Request</a>
+                </div>
             </div>
             <div class="card-header">
                 <div class="d-flex justify-content-between">
