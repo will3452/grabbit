@@ -1,15 +1,20 @@
 $(document).ready(function(){
+
     $(".likeform").on('submit', function(e){
+        // just to make response fast in the ui side
+        let payload = new FormData(this)
+        $('.like_'+payload.get('likeinput')).toggleClass('color_like');
+
         e.preventDefault();
         $.ajax({
             url:'/like',
             method:'POST',
-            data:new FormData(this),
+            data:payload,
             processData:false,
             dataType:'json',
             contentType:false,
             success:function(data){
-
+                console.log('data.id_back >> ', data.id_back)
                 if(data.messages=='like'){
                     $('.like_'+data.id_back).addClass('color_like');
                     var like = $('.totallike_'+data.id_back).text();
