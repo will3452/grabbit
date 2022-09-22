@@ -50,6 +50,26 @@
     </div>
     @foreach ($posts as $post)
         <div class="card mt-2">
+            <div class="card-header d-flex align-items-baseline">
+                    <div>{{ucfirst($post->getUserPost()->name)}}</div>
+                @if (!$post->checkUserAuthPost())
+                    <form class="followform " method="POST">
+                        @csrf
+                        <input type="hidden" value="{{$post->getProfilePost()->id}}" name="following_id">
+                        
+                        @if ($post->checkUserFollowStatus())
+                            <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">Unfollow</button>
+                        @else
+                            <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">Follow</button>
+                        @endif
+
+                       
+
+                    </form>
+                @else
+                    <div>{{ '(me)'}}</div>
+                @endif
+            </div>
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <div>
@@ -66,35 +86,17 @@
                 </div>
                 <hr>
                 <form class="likeform d-flex" method="POST">
-                    <div class="{{'totallike_'.$post->id}} p-1">{{$post->calculate_like()}}</div>
+                    <div class="{{'totallike_'.$post->id}} p-1">{{$post->calculateLike()}}</div>
                     @csrf
                     <input class="post-{{$post->id}}" type="hidden" value="{{$post->id}}" name="likeinput">
                     <button type="submit" class="remove_outline_button">
 
-                            <svg class="icon me-2  @if ($post->check_like_by_user()) color_like @endif {{'like_'.$post->id}}">
+                            <svg class="icon me-2  @if ($post->checkLikeByUser()) color_like @endif {{'like_'.$post->id}}">
                                 <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-up"></use>
                             </svg>
 
                     </button>
                 </form>
-            </div>
-            <div class="card-footer">
-                <div>
-                    <h6>Comments
-                        @if ($post->getCommentsCount() != 0)
-                            <div class="badge bg-primary">{{$post->getCommentsCount()}}</div>
-                        @endif
-                    </h6>
-                    <form action="{{route('comment.new')}}" method="POST" class="comment-form">
-                        @csrf
-                        <input type="hidden" name="model_type" value="\App\Models\Post">
-                        <input type="hidden" name="model_id" value="{{$post->id}}">
-                        <textarea name="value" placeholder="Aa" max="100" max-length="100" class="form-control"></textarea>
-                        <div style="text-align:right !important;" class="text-right mt-2">
-                            <button type="submit" class="btn btn-primary">submit</button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     @endforeach

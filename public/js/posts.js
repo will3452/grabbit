@@ -30,22 +30,26 @@ $(document).ready(function(){
         });
     });
 
-    $(".comment-form").on('submit', function(e){
-        let payload = new FormData(this)
-        $(this).hide()
-        let form = this
+    $(".followform").on('submit', function(e){
         e.preventDefault();
         $.ajax({
-            url:'/comments',
+            url:'/follows',
             method:'POST',
-            data:payload,
+            data:new FormData(this),
             processData:false,
             dataType:'json',
             contentType:false,
             success:function(data){
-                console.log(data)
-                $(form).show()
+
+                if(data.messages=='Follow'){
+
+                    $('.followbtn_'+data.followed_id).text('Unfollow')
+                    console.log(data);
+                }else if(data.messages=='Unfollow'){
+                    $('.followbtn_'+data.unfollowed_id).text('Follow')
+                    console.log(data);
+                }
             }
         });
     });
-  });
+});
