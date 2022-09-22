@@ -74,6 +74,7 @@ class Post extends Model
     }
 
     public function getPublicImage() {
+        if (! $this->attachments) return '';
         $arr = explode('/', $this->attachments);
         return "/storage/" . $arr[1];
     }

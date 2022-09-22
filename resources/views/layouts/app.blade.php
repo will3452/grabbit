@@ -115,7 +115,7 @@
                                     <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-comment-square"></use>
                                 </svg> Comments<span class="badge badge-sm bg-warning ms-2">42</span></a>
                             <div class="dropdown-header bg-light py-2">
-                            </div><a class="dropdown-item" href="#">
+                            </div><a class="dropdown-item" href="/profile">
                                 <svg class="icon me-2">
                                     <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-user"></use>
                                 </svg> Profile</a>
