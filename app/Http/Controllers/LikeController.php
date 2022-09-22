@@ -11,7 +11,7 @@ class LikeController extends Controller
 {
     public function store(Request $request){
 
-        $data = auth()->user()->likes()->where('post_id', $request->input('likeinput'))->first();
+        $data = auth()->user()->likes()->wherePostId($request->input('likeinput'))->first();
 
         if($data){
 

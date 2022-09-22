@@ -15,18 +15,18 @@ class Post extends Model
         'attachments',
     ];
 
-    public function check_like_by_user($post_id){ //check if user already like
+    public function check_like_by_user(){ //check if user already like
 
         $userId = auth()->user()->id;
 
-        $like = Like::where('user_id', $userId)->where('post_id', $post_id)->first();
+        $like = Like::whereUserId($userId)->wherePostId($this->id)->first();
 
         return $like;
 
     }
-    public function calculate_like($post_id){
+    public function calculate_like(){
 
-        $count = Like::where('post_id', $post_id)->count();
+        $count = Like::wherePostId($this->id)->count();
 
         return $count;
 
@@ -37,5 +37,9 @@ class Post extends Model
 
     public function likes(){
         return $this->hasMany(Like::class);
+    }
+
+    public function getCommentsCount () {
+        return Comment::whereModelType('\\App\\Models\\Post')->whereModelId($this->id)->count();
     }
 }
