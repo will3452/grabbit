@@ -15,7 +15,7 @@ class Post extends Model
         'attachments',
     ];
 
-    public function checkLikeByUser(){ //check if user already like
+    public function check_like_by_user(){ //check if user already like
 
         $userId = auth()->user()->id;
 
@@ -24,37 +24,7 @@ class Post extends Model
         return $like;
 
     }
-    public function checkUserFollowStatus(){ //check user follow status on other user
-
-        $profile = $this->getProfilePost($this->user_id);
-
-        $profile_id = $profile->id;
-
-        $follow = Follow::whereFollowerId(auth()->user()->id)->whereFollowingId($profile_id)->count();
-
-        return $follow;
-    }
-    public function checkUserAuthPost(){ //check post if posted by auth user
-
-        $userId = auth()->user()->id;
-
-        $post = Post::whereUserId($userId)->whereId($this->id)->first();
-
-        return $post;
-    }
-    public function getUserPost(){ //get user data of post user
-
-        $user = User::whereId($this->user_id)->first();
-
-        return $user;
-    }
-    public function getProfilePost(){ //get profile of the poser
-        
-        $profile = Profile::whereUserId($this->user_id)->first();
-
-        return $profile;
-    }
-    public function calculateLike(){ //calculate totla like
+    public function calculate_like(){
 
         $count = Like::wherePostId($this->id)->count();
 

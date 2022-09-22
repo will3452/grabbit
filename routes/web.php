@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
@@ -62,9 +61,4 @@ Route::name('profile.')->middleware(['auth'])->prefix('/profile')->group(functio
 Route::name('notification.')->middleware(['auth'])->prefix('/notification')->group(function () {
     Route::get('/', [NotificationController::class, 'index'])->name('index');
     Route::get('/{data}', [NotificationController::class, 'show'])->name('show');
-});
-
-//follow
-Route::name('follow.')->middleware(['auth'])->prefix('/follows')->group(function () {
-    Route::post('/', [FollowController::class, 'store'])->name('store');
 });

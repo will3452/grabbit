@@ -14109,14 +14109,6 @@ html:not([dir=rtl]) .wrapper {
   padding:0;
 }
 .color_like{
-  color:var(--cui-blue);
+  color:blue;
   font-weight:700;
-}
-.outline-none{
-  padding: 0;
-  border: none;
-  outline: none;;
-  color:var(--cui-blue);
-  margin:-4px 0 0 6px;
-  background:none;
 }
