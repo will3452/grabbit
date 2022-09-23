@@ -83,7 +83,7 @@
                             <svg class="icon icon-lg">
                                 <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
                             </svg></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">
+                    <li class="nav-item"><a class="nav-link" href="{{route('meetup.showrequestmeetuplist')}}">
                             <svg class="icon icon-lg">
                                 <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-list-rich"></use>
                             </svg></a></li>

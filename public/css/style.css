@@ -14120,3 +14120,8 @@ html:not([dir=rtl]) .wrapper {
   margin:-4px 0 0 6px;
   background:none;
 }
+
+.table_auto{
+  width: 100%;
+  overflow-x:auto;
+}

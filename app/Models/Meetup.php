@@ -24,4 +24,17 @@ class Meetup extends Model
         return $this->belongsTo(Post::class);
         
     }
+
+    public function getUserPost(){ //get user data of post user
+
+        $user = User::whereId($this->requestor_id)->first();
+
+        return $user;
+    }
+    public function getPost(){ 
+
+        $post = Post::whereId($this->post_id)->first();
+
+        return $post;
+    }
 }

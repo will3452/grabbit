@@ -53,4 +53,35 @@ $(document).ready(function(){
             }
         });
     });
+
+
+    $("#process_meetup").on('submit', function(e){
+        // just to make response fast in the ui side
+        let payload = new FormData(this)
+        $(".btn-primary").text('loading...');
+        var form = this;
+        e.preventDefault();
+        $.ajax({
+            url:$(form).attr('action'),
+            method:$(form).attr('method'),
+            data:payload,
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            success:function(data){
+                if(data.status == 400){
+                    error_handling('process', data.messages.process);
+                    $(".btn-primary").text('Process Meetup');
+                    console.log(data);
+                }else if(data.status == 404){
+                    error_handling('process', data.messages);
+                    $(".btn-primary").text('Process Meetup');
+                    console.log(data);
+                }else{
+                    
+                    window.location.href = '/meetup/request-meetup';
+                }
+            }
+        });
+    });
 });

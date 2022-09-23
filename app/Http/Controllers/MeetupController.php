@@ -87,6 +87,8 @@ class MeetupController extends Controller
                     );
                }else{
 
+                // create_notification ...notif here
+
                      $meetup->create($request->all());
 
                      return response()->json(
@@ -110,17 +112,105 @@ class MeetupController extends Controller
 
         }
     }
+    public function showrequestmeetuplist(Request $request){
 
-    public function cancel(){
+        $meetup = new Meetup;
 
+        $approver_id = auth()->user()->id;
+
+        $meetupdata = $meetup->whereApproverId($approver_id)->latest()->take(25)->paginate(5);
+
+        return view('meetup.request_meetup' ,compact('meetupdata'));
 
     }
-    public function approved(){
+    public function processmeetupview(Request $request){
 
+        $meetup = new Meetup;
 
+        $approver_id = auth()->user()->id;
+
+        $meetupdata = $meetup->whereApproverId($approver_id)->whereId($request->meetup_id)->first();
+
+        if($meetupdata){
+
+            return view('meetup.process', compact('meetupdata'));
+
+        }else{
+
+            abort(404);
+        }
     }
-    public function index(){
+    public function processmeetup(Request $request){
 
-        
+        $meetup = new Meetup;
+
+        $approver_id = auth()->user()->id;
+
+        $data = Validator::make($request->all(),
+            [
+                'meetup_id' => 'required',
+                'process' => 'required',
+            ]
+        );
+        if($data->fails()){
+
+            return response()->json(
+                [
+                     'status'=>400,
+                     'messages'=>$data->getMessageBag(),
+                ]
+            );
+ 
+        }else{
+            
+            $meetupdata = $meetup->whereApproverId($approver_id)->whereId($request->input('meetup_id'))->first();
+
+            date_default_timezone_set('Asia/Manila');
+
+            if($request->input('process') == 'accept'){ //accept meetup
+
+                $meetupdata->approved_at = date('Y-m-d h:i:s');
+
+                $meetupdata->declined_at = null;
+
+                $meetupdata->save();
+
+                // create_notification ...notif here
+
+                return response()->json(
+                    [
+                         'status'=>200,
+                         'messages'=> 'success'
+                    ]
+                );
+
+            }elseif($request->input('process') == 'decline'){ //decline meetup
+
+                $meetupdata->approved_at = null;
+
+                $meetupdata->declined_at = date('Y-m-d h:i:s');
+
+                $meetupdata->save();
+
+                // create_notification ...notif here
+
+                return response()->json(
+                    [
+                         'status'=>200,
+                         'messages'=> 'success'
+                    ]
+                );
+
+            }else{
+
+                return response()->json(
+                    [
+                         'status'=>404,
+                         'messages'=>'Validate Meetup Process',
+                    ]
+                );
+            }
+
+        }
     }
 }
