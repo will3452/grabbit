@@ -66,7 +66,7 @@ class MeetupController extends Controller
         }else{
 
             $posts = Post::whereId($request->input('post_id'))->first();
-
+            
             $request['requestor_id'] = auth()->user()->id;
             $request['approver_id'] = $posts->user_id;
 
@@ -121,6 +121,17 @@ class MeetupController extends Controller
         $meetupdata = $meetup->whereApproverId($approver_id)->latest()->take(25)->paginate(5);
 
         return view('meetup.request_meetup' ,compact('meetupdata'));
+
+    }
+    public function showrequestedmeetuplist(Request $request){
+
+        $meetup = new Meetup;
+
+        $authid = auth()->user()->id;
+
+        $meetupdata = $meetup->whereRequestorId($authid)->latest()->take(25)->paginate(5);
+
+        return view('meetup.requested_meetup' ,compact('meetupdata'));
 
     }
     public function processmeetupview(Request $request){

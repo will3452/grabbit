@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@php
+   $links = '/meetup/create/'.$posts->id;
+@endphp
 @section('breadcrumb')
     <x-breadcrumb :links="[
         [
@@ -10,6 +13,11 @@
         [
             'label' => 'Posts',
             'link' => '/posts',
+            'active' => false
+        ],
+        [
+            'label' => 'Create Meetup',
+            'link' => $links,
             'active' => true
         ]
     ]"/>

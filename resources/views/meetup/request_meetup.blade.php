@@ -8,9 +8,14 @@
             'active' => false,
         ],
         [
-            'label' => 'Posts',
-            'link' => '/posts',
+            'label' => 'Requesting Meetup',
+            'link' => '/meetup/request-meetup',
             'active' => true
+        ],
+        [
+            'label' => 'Requested Meetup',
+            'link' => '/meetup/requested-meetup',
+            'active' => false
         ]
     ]"/>
 @endsection

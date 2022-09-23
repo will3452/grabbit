@@ -1,18 +1,30 @@
 @extends('layouts.app')
-
+@php
+     $links = '/meetup/request-meetup/'.$meetupdata->id.'/process';
+@endphp
 @section('breadcrumb')
-    <x-breadcrumb :links="[
-        [
-            'label' => 'Home',
-            'link' => '/home',
-            'active' => false,
-        ],
-        [
-            'label' => 'Posts',
-            'link' => '/posts',
-            'active' => true
-        ]
-    ]"/>
+<x-breadcrumb :links="[
+    [
+        'label' => 'Home',
+        'link' => '/home',
+        'active' => false,
+    ],
+    [
+        'label' => 'Requesting Meetup',
+        'link' => '/meetup/request-meetup',
+        'active' => false
+    ],
+    [
+        'label' => 'Requested Meetup',
+        'link' => '/meetup/requested-meetup',
+        'active' => false
+    ],
+    [
+        'label' => 'Process',
+        'link' =>  $links,
+        'active' => true
+    ]
+]"/>
 @endsection
 @section('content')
 

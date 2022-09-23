@@ -73,10 +73,9 @@ Route::name('follow.')->middleware(['auth'])->prefix('/follows')->group(function
 //meetup
 Route::name('meetup.')->middleware(['auth'])->prefix('/meetup')->group(function () {
     Route::get('/create/{id_post}', [MeetupController::class, 'create'])->name('create');
-    Route::post('/', [MeetupController::class, 'store'])->name('store');
-    Route::patch('/list/{meetup_id}', [MeetupController::class, 'process'])->name('process');
     Route::get('/request-meetup', [MeetupController::class, 'showrequestmeetuplist'])->name('showrequestmeetuplist');
+    Route::get('/requested-meetup', [MeetupController::class, 'showrequestedmeetuplist'])->name('showrequestedmeetuplist');
     Route::get('/request-meetup/{meetup_id}/process', [MeetupController::class, 'processmeetupview'])->name('processmeetupview');
+    Route::post('/', [MeetupController::class, 'store'])->name('store');
     Route::post('/request-meetup', [MeetupController::class, 'processmeetup'])->name('processmeetup');
-
 });
