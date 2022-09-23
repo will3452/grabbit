@@ -91,6 +91,9 @@
                 <div>
                     {{$post->descriptions}}
                 </div>
+                <div>
+                    <a target="_blank" href="{{$post->getPublicImage()}}"><img style="max-height:300px !important;" src="{{$post->getPublicImage()}}" alt=""></a>
+                </div>
                 <hr>
                 <form class="likeform d-flex" method="POST">
                     <div class="{{'totallike_'.$post->id}} p-1">{{$post->calculateLike()}}</div>

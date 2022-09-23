@@ -20,9 +20,9 @@ class PostController extends Controller
             $data = null;
             $posts = Post::latest()->take(25)->get();
             return view('posts.index', compact('posts', 'data'));
-         
+
         }
-        
+
     }
 
     public function store (Request $request) {
@@ -40,12 +40,12 @@ class PostController extends Controller
             'attachments' => ['image', 'max:5000'], // 5mb
         ]);
 
-        $data['attachments'] = json_encode($request->attachments->store('public')); // wip multiple image
+        $data['attachments'] = $request->attachments->store('public'); // wip multiple image
 
         // auth()->user()->post()->create($data);
         $data['user_id'] = auth()->id();
         Post::create($data);
-        
+
         return back()->withSuccess('Post added!');
     }
 }

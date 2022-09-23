@@ -49,7 +49,7 @@ class Post extends Model
         return $user;
     }
     public function getProfilePost(){ //get profile of the poser
-        
+
         $profile = Profile::whereUserId($this->user_id)->first();
 
         return $profile;
@@ -73,5 +73,10 @@ class Post extends Model
     }
     public function meetups(){
         return $this->hasMany(Meetup::class);
+    }
+    public function getPublicImage() {
+        if (! $this->attachments) return '';
+        $arr = explode('/', $this->attachments);
+        return "/storage/" . $arr[1];
     }
 }
