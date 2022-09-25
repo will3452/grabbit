@@ -46,7 +46,7 @@ Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(functi
 
 Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('index');
-    Route::post('/', [PostController::class, 'store'])->name('store');
+    // Route::post('/', [PostController::class, 'store'])->name('store');
 });
 
 //like

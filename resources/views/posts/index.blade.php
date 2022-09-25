@@ -15,26 +15,7 @@
     ]"/>
 @endsection
 @section('content')
-    <div class="card">
-        <div class="card-header">Create new post</div>
-        <form class="card-body" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <input required name="title" type="text" class="form-control" placeholder="title">
-            </div>
-            <div class="form-group mt-2">
-                <textarea required name="descriptions" placeholder="descriptions" class="form-control" id="description" rows="3"></textarea>
-            </div>
-            <div class="form-group mt-2">
-                <input required type="file" name="attachments">
-            </div>
-            <div class="mt-2 form-group" style="text-align:right !important;">
-                <button type="submit" class="btn btn-primary">
-                    Create new post
-                </button>
-            </div>
-        </form>
-    </div>
+    @livewire('postlivewire')
     <div class="card mt-3">
         <div class="card-header">Search Post</div>
         <form class="card-body" method="GET" action="">
@@ -128,5 +109,5 @@
             </div>
         </div>
     @endforeach
-    <script src="{{ asset('js/posts.js') }}" defer></script>
+    <script src="{{ asset('js/posts.js') }}"></script>
 @endsection

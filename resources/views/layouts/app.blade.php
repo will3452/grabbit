@@ -43,6 +43,7 @@
     <!-- We use those styles to show code examples, you should remove them in your application.-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css">
     <link href="/css/examples.css" rel="stylesheet">
+    @livewireStyles
     <!-- Global site tag (gtag.js) - Google Analytics-->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -61,7 +62,6 @@
 </head>
 
 <body>
-
     <x-sidebar></x-sidebar>
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
         <header class="header header-sticky mb-4">
@@ -151,7 +151,7 @@
     <script src="/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
     <script src="/vendors/simplebar/js/simplebar.min.js"></script>
     <script></script>
-
+    @livewireScripts
 </body>
 
 </html>
