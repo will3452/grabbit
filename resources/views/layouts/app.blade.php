@@ -73,7 +73,7 @@
                     </svg>
                 </button><a class="header-brand d-md-none" href="#">
                     <svg width="118" height="46" alt="CoreUI Logo">
-                        <use xlink:href="/assets/brand/coreui.svg#full"></use>
+                        <img style="width:50px; height:40px;   object-fit: cover; margin-left:-110px;" src="{{ asset('storage/logo/logo.png') }}" alt="">
                     </svg></a>
                 <ul class="header-nav d-none d-md-flex">
                     <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
