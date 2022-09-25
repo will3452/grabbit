@@ -37,7 +37,7 @@ class PostLivewire extends Component
         $data['user_id'] = auth()->id();
         Post::create($data);
 
-        return redirect()->route('post.index');
+        return redirect()->route('post.index')->with('success', 'Post added!');
 
 
     }
