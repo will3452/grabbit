@@ -33,8 +33,18 @@
     @endif
     <form wire:submit.prevent="addComment" class="mt-4">
         <textarea wire:model="comment" name="value" placeholder="Aa" max="100" max-length="100" class="form-control"></textarea>
-        <div style="text-align:right !important;" class="text-right mt-2">
-            <button type="submit" class="btn btn-primary">submit</button>
-        </div>
+        @if (strlen($comment) >= 1)
+            <div style="text-align:right;" class="mt-4" >
+                <button type="submit" class="btn btn-primary btn-sm">
+                    Submit Comment
+                </button>
+            </div>
+        @else
+            <div style="text-align:right;" class="mt-4" >
+                <button type="button" disabled class="btn btn-primary btn-sm">
+                    Submit Comment
+                </button>
+            </div>
+        @endif
     </form>
 </div>
