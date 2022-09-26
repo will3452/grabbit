@@ -19,4 +19,8 @@ class Comment extends Model
     public function model () {
         return $this->morphTo();
     }
+
+    public function user () {
+        return $this->belongsTo(User::class);
+    }
 }
