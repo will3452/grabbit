@@ -38,14 +38,14 @@
                     <form class="followform " method="POST">
                         @csrf
                         <input type="hidden" value="{{$post->getProfilePost()->id}}" name="following_id">
-                        
+
                         @if ($post->checkUserFollowStatus())
                             <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">Unfollow</button>
                         @else
                             <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">Follow</button>
                         @endif
 
-                    
+
 
                     </form>
                     @else
@@ -76,7 +76,7 @@
                     <a target="_blank" href="{{$post->getPublicImage()}}"><img style="max-height:300px !important;" src="{{$post->getPublicImage()}}" alt=""></a>
                 </div>
                 <hr>
-                <form class="likeform d-flex" method="POST">
+                {{-- <form class="likeform d-flex" method="POST">
                     <div class="{{'totallike_'.$post->id}} p-1">{{$post->calculateLike()}}</div>
                     @csrf
                     <input class="post-{{$post->id}}" type="hidden" value="{{$post->id}}" name="likeinput">
@@ -87,7 +87,8 @@
                             </svg>
 
                     </button>
-                </form>
+                </form> --}}
+                <livewire:like :post="$post->id" :key="$post->id">
             </div>
             <div class="card-footer">
                 <div>
