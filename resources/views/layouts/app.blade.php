@@ -43,7 +43,6 @@
     <!-- We use those styles to show code examples, you should remove them in your application.-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css">
     <link href="/css/examples.css" rel="stylesheet">
-    @livewireStyles
     <!-- Global site tag (gtag.js) - Google Analytics-->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -59,6 +58,8 @@
         // Bootstrap ID
         gtag('config', 'UA-118965717-5');
     </script>
+
+@livewireStyles
 </head>
 
 <body>
@@ -73,7 +74,7 @@
                     </svg>
                 </button><a class="header-brand d-md-none" href="#">
                     <svg width="118" height="46" alt="CoreUI Logo">
-                        <img style="width:50px; height:40px;   object-fit: cover; margin-left:-110px;" src="{{ asset('storage/logo/logo.png') }}" alt="">
+                        <img style="width:50px; height:40px;   object-fit: cover; margin-left:-110px;" src="/logo.png" alt="">
                     </svg></a>
                 <ul class="header-nav d-none d-md-flex">
                     <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>

@@ -1,6 +1,6 @@
 <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
     <div class="logo-container">
-      <img class="logo-image" src="{{ asset('storage/logo/logo.png') }}" alt="">
+      <img class="logo-image" src="{{ asset('/logo.png') }}" alt="">
     </div>
  </svg>
  <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
