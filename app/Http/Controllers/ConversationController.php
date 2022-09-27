@@ -14,21 +14,23 @@ class ConversationController extends Controller
 
         $data['created_by'] = auth()->id();
 
-        $check_create_by = Message::where([['created_by', $data['created_by']], ['read_by', $data['read_by']]])
-                        ->orWhere([['created_by', $data['read_by']], ['read_by', $data['created_by']]])->first();
+        return view('message.index', compact('data'));
 
-        if($check_create_by){
+        // $check_create_by = Message::where([['created_by', $data['created_by']], ['read_by', $data['read_by']]])
+        //                 ->orWhere([['created_by', $data['read_by']], ['read_by', $data['created_by']]])->first();
 
-            $data['conversation_id'] = $check_create_by->conversation_id;
+        // if($check_create_by){
 
-              return view('message.index', compact('data'));
+        //     $data['conversation_id'] = $check_create_by->conversation_id;
 
-        }else{
+        //       return view('message.index', compact('data'));
 
-            $data['conversation_id'] = '';
+        // }else{
 
-              return view('message.index', compact('data'));
-        }
+        //     $data['conversation_id'] = '';
+
+        //       return view('message.index', compact('data'));
+        // }
 
     }
 }
