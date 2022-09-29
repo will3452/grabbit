@@ -51,6 +51,9 @@
                     @else
                         <div>{{ '(me)'}}</div>
                     @endif
+                    @if (!$post->checkUserAuthPost())
+                        <livewire:block :user_block="$post->user_id" :key="$post->user_id">
+                    @endif
                 </div>
                 <div>
                     @if (!$post->checkUserAuthPost())
