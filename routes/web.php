@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlockController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
@@ -70,6 +71,9 @@ Route::name('follow.')->middleware(['auth'])->prefix('/follows')->group(function
     Route::post('/', [FollowController::class, 'store'])->name('store');
 });
 
+Route::name('block.')->middleware(['auth'])->prefix('/blocks')->group(function () {
+    Route::post('/', [BlockController::class, 'block'])->name('block');
+});
 //meetup
 Route::name('meetup.')->middleware(['auth'])->prefix('/meetup')->group(function () {
     Route::get('/create/{id_post}', [MeetupController::class, 'create'])->name('create');

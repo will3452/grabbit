@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Validation\Rules\Exists;
 
 class Post extends Model
 {
@@ -67,6 +68,12 @@ class Post extends Model
 
     public function likes(){
         return $this->hasMany(Like::class);
+    }
+    public function CheckUserBlock(){
+
+        $block = Block::where('blocked_id', $this->user_id)->where('user_id', auth()->user()->id)->first();
+
+        return $block;
     }
     public function getCommentsCount () {
         return Comment::whereModelType('\\App\\Models\\Post')->whereModelId($this->id)->count();

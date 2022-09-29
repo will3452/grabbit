@@ -30,7 +30,8 @@
         </form>
     </div>
     @foreach ($posts as $post)
-        <div class="card mt-2">
+        @if (!$post->CheckUserBlock())
+        <div class="card mt-2 {{'block_post_hide_'.$post->user_id}}">
             <div class="card-header d-flex justify-content-between align-items-baseline">
                 <div class="d-flex align-items-baseline">
                     <div>{{ucfirst($post->getUserPost()->name)}}</div>
@@ -48,11 +49,14 @@
 
 
                     </form>
-                    @else
-                        <div>{{ '(me)'}}</div>
                     @endif
                     @if (!$post->checkUserAuthPost())
-                        <livewire:block :user_block="$post->user_id" :key="$post->user_id">
+                        {{-- <livewire:block :user_block="$post->user_id" :key="$post->user_id"> --}}
+                        <form class="blockform" method="POST">
+                            @csrf
+                            <input type="hidden" value="{{$post->user_id}}" name="blocked_id">
+                            <button class="btn-link outline-none" type="submit">Block</button>
+                        </form>
                     @endif
                 </div>
                 <div>
@@ -85,6 +89,7 @@
                 <livewire:comment :post="$post->id" :key="$comment->id"/>
             </div>
         </div>
+        @endif
     @endforeach
     <script src="{{ asset('js/posts.js') }}"></script>
 @endsection
