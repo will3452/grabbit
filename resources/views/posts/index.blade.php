@@ -34,6 +34,15 @@
         <div class="card mt-2 {{'block_post_hide_'.$post->user_id}}">
             <div class="card-header d-flex justify-content-between align-items-baseline">
                 <div class="d-flex align-items-baseline">
+                    @if (!$post->checkUserAuthPost())
+                        <div style="margin-right:-10px;">
+                            <a class="header-brand" href="/convo/message/{{$post->getProfilePost()->id}}">
+                                <svg class="icon icon-lg">
+                                    <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-comment-square"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    @endif
                     <div>{{ucfirst($post->getUserPost()->name)}}</div>
                     @if (!$post->checkUserAuthPost())
                     <form class="followform " method="POST">
@@ -45,9 +54,6 @@
                         @else
                             <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">Follow</button>
                         @endif
-
-
-
                     </form>
                     @endif
                     @if (!$post->checkUserAuthPost())

@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MeetupController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Conversation;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Route;
 
@@ -82,4 +84,11 @@ Route::name('meetup.')->middleware(['auth'])->prefix('/meetup')->group(function 
     Route::get('/request-meetup/{meetup_id}/process', [MeetupController::class, 'processmeetupview'])->name('processmeetupview');
     Route::post('/', [MeetupController::class, 'store'])->name('store');
     Route::post('/request-meetup', [MeetupController::class, 'processmeetup'])->name('processmeetup');
+});
+
+
+//messages / convo
+
+Route::name('message.')->middleware(['auth'])->prefix('/convo')->group(function () {
+    Route::get('/message/{read_by}', [ConversationController::class, 'index'])->name('index');
 });
