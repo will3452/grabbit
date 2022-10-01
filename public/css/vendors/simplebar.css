@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  background: #1F913B;
 }
-
+.sidebar-brand, .sidebar-toggler {
+    background: #4CCF6B !important;
+}
 /*# sourceMappingURL=simplebar.css.map */

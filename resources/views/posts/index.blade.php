@@ -47,7 +47,7 @@
                     <form class="followform " method="POST">
                         @csrf
                         <input type="hidden" value="{{$post->getProfilePost()->id}}" name="following_id">
-                        
+
                         @if ($post->checkUserFollowStatus())
                             <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">Unfollow</button>
                         @else
@@ -82,36 +82,10 @@
                     <a target="_blank" href="{{$post->getPublicImage()}}"><img style="max-height:300px !important;" src="{{$post->getPublicImage()}}" alt=""></a>
                 </div>
                 <hr>
-                <form class="likeform d-flex" method="POST">
-                    <div class="{{'totallike_'.$post->id}} p-1">{{$post->calculateLike()}}</div>
-                    @csrf
-                    <input class="post-{{$post->id}}" type="hidden" value="{{$post->id}}" name="likeinput">
-                    <button type="submit" class="remove_outline_button">
-
-                            <svg class="icon me-2  @if ($post->checkLikeByUser()) color_like @endif {{'like_'.$post->id}}">
-                                <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-thumb-up"></use>
-                            </svg>
-
-                    </button>
-                </form>
+                <livewire:like :post="$post->id" :key="$post->id">
             </div>
             <div class="card-footer">
-                <div>
-                    <h6>Comments
-                        @if ($post->getCommentsCount() != 0)
-                            <div class="badge bg-primary">{{$post->getCommentsCount()}}</div>
-                        @endif
-                    </h6>
-                    <form action="{{route('comment.new')}}" method="POST" class="comment-form">
-                        @csrf
-                        <input type="hidden" name="model_type" value="\App\Models\Post">
-                        <input type="hidden" name="model_id" value="{{$post->id}}">
-                        <textarea name="value" placeholder="Aa" max="100" max-length="100" class="form-control"></textarea>
-                        <div style="text-align:right !important;" class="text-right mt-2">
-                            <button type="submit" class="btn btn-primary">submit</button>
-                        </div>
-                    </form>
-                </div>
+                <livewire:comment :post="$post->id" :key="$comment->id"/>
             </div>
         </div>
     @endforeach
