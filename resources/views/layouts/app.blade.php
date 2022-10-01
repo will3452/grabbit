@@ -64,6 +64,10 @@
 
 <body>
     <x-sidebar></x-sidebar>
+    <div class="alert alert-success alert-dismissible fade show alert-show" role="alert">
+        <span class="alert-messages"></span>
+        <button type="button" class="btn-close" data-coreui-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="wrapper d-flex flex-column min-vh-100 bg-light">
         <header class="header header-sticky mb-4">
             <div class="container-fluid">
