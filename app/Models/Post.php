@@ -86,4 +86,9 @@ class Post extends Model
         $arr = explode('/', $this->attachments);
         return "/storage/" . $arr[1];
     }
+    public function reports(){
+
+        return $this->morphToMany(Report::class, 'reportable');
+        
+    }
 }

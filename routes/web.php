@@ -9,6 +9,7 @@ use App\Http\Controllers\MeetupController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
 use App\Models\Conversation;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Route;
@@ -91,4 +92,9 @@ Route::name('meetup.')->middleware(['auth'])->prefix('/meetup')->group(function 
 
 Route::name('message.')->middleware(['auth'])->prefix('/convo')->group(function () {
     Route::get('/message/{read_by}', [ConversationController::class, 'index'])->name('index');
+});
+
+//report
+Route::name('report.')->middleware(['auth'])->prefix('/report')->group(function () {
+    Route::get('/{report_type}/{report_id}', [ReportController::class, 'index'])->name('index');
 });

@@ -73,4 +73,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Block::class);
     }
+    public function reports(){
+
+        return $this->morphToMany(Report::class, 'reportable');
+        
+    }
 }

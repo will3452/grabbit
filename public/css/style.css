@@ -14240,3 +14240,13 @@ html:not([dir=rtl]) .wrapper {
   font-size:20px;
   color:#1f913b;
 }
+.reports {
+
+  color:var(--cui-red);
+  font-size:13px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.reports:hover{
+  color:darkred;
+}

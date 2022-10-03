@@ -89,7 +89,20 @@
                     <a target="_blank" href="{{$post->getPublicImage()}}"><img style="max-height:300px !important;" src="{{$post->getPublicImage()}}" alt=""></a>
                 </div>
                 <hr>
-                <livewire:like :post="$post->id" :key="$post->id">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <livewire:like :post="$post->id" :key="$post->id">
+                    </div>
+                    @if (!$post->checkUserAuthPost())
+                    <div>
+                        <a href="/report/post/{{$post->id}}" class="reports"> 
+                            <svg class="icon icon-lg">
+                                <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-flag-alt"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    @endif
+                </div>
             </div>
             <div class="card-footer">
                 <livewire:comment :post="$post->id" :key="$comment->id"/>
