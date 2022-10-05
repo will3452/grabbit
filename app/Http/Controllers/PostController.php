@@ -14,11 +14,11 @@ class PostController extends Controller
         $data = $request->search;
 
         if($data){
-            $posts = Post::where('title', 'like','%'.$data.'%')->latest()->get();
+            $posts = Post::where('title', 'like','%'.$data.'%')->latest()->paginate(5);
             return view('posts.index', compact('posts', 'data'));
         }else{
             $data = null;
-            $posts = Post::latest()->take(25)->get();
+            $posts = Post::latest()->paginate(5);
             return view('posts.index', compact('posts', 'data'));
 
         }

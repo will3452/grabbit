@@ -95,7 +95,7 @@
                     </div>
                     @if (!$post->checkUserAuthPost())
                     <div>
-                        <a href="/report/post/{{$post->id}}" class="reports"> 
+                        <a href="/report/post/{{$post->id}}" class="reports">
                             <svg class="icon icon-lg">
                                 <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-flag-alt"></use>
                             </svg>
@@ -110,5 +110,8 @@
         </div>
         @endif
     @endforeach
+    <div class="mt-4">
+    {{$posts->links()}}
+    </div>
     <script src="{{ asset('js/posts.js') }}"></script>
 @endsection
