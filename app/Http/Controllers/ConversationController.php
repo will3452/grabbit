@@ -16,21 +16,13 @@ class ConversationController extends Controller
 
         return view('message.index', compact('data'));
 
-        // $check_create_by = Message::where([['created_by', $data['created_by']], ['read_by', $data['read_by']]])
-        //                 ->orWhere([['created_by', $data['read_by']], ['read_by', $data['created_by']]])->first();
+    }
+    public function conversations(Request $request){
 
-        // if($check_create_by){
+        $id_auth = auth()->user()->id;
 
-        //     $data['conversation_id'] = $check_create_by->conversation_id;
+        $convo = Conversation::where('name', 'like', '%' . $id_auth . '%')->get();
 
-        //       return view('message.index', compact('data'));
-
-        // }else{
-
-        //     $data['conversation_id'] = '';
-
-        //       return view('message.index', compact('data'));
-        // }
-
+        return view('message.convo', compact('convo'));
     }
 }
