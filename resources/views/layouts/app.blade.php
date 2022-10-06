@@ -84,18 +84,23 @@
                     <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
                 </ul>
                 <ul class="header-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('notification.index')}}">
                             <svg class="icon icon-lg">
                                 <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
-                            </svg></a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('meetup.showrequestmeetuplist')}}">
-                            <svg class="icon icon-lg">
-                                <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-list-rich"></use>
-                            </svg></a></li>
+                            </svg>
+                            @if (count(auth()->user()->unreadNotifications()))
+                                <span class="badge-sm bg-danger badge">
+                                    {{count(auth()->user()->unreadNotifications())}}
+                                </span>
+                            @endif
+                        </a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="#">
-                            <svg class="icon icon-lg">
-                                <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
-                            </svg></a></li>
+                        <svg class="icon icon-lg">
+                            <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
+                        </svg></a>
+                    </li>
                 </ul>
                 <ul class="header-nav ms-3">
                     <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#"
@@ -106,19 +111,23 @@
                         <div class="dropdown-menu dropdown-menu-end pt-0">
                             <div class="dropdown-header bg-light py-2">
                                 <div class="fw-semibold">Account</div>
-                            </div><a
-                                class="dropdown-item" href="/convo">
-                                <svg class="icon me-2">
-                                    <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
-                                </svg> Messages<span class="badge badge-sm bg-success ms-2">42</span></a><a
-                                class="dropdown-item" href="#">
-                                <svg class="icon me-2">
-                                    <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-task"></use>
-                                </svg> Tasks<span class="badge badge-sm bg-danger ms-2">42</span></a><a
-                                class="dropdown-item" href="#">
-                                <svg class="icon me-2">
-                                    <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-comment-square"></use>
-                                </svg> Comments<span class="badge badge-sm bg-warning ms-2">42</span></a>
+                            </div>
+                                <a class="dropdown-item" href="/convo">
+                                    <svg class="icon me-2">
+                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
+                                    </svg> Messages
+                                </a>
+                                <a class="dropdown-item" href="{{route('meetup.showrequestedmeetuplist')}}">
+                                    <svg class="icon me-2">
+                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-task"></use>
+                                    </svg> My Request
+                                </a>
+                                <a class="dropdown-item" href="{{route('meetup.showrequestmeetuplist')}}">
+                                    <svg class="icon me-2">
+                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-task"></use>
+                                    </svg> Others Request
+                                </a>
+
                             <div class="dropdown-header bg-light py-2">
                             </div><a class="dropdown-item" href="/profile">
                                 <svg class="icon me-2">

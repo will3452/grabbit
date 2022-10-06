@@ -12,15 +12,10 @@
             'link' => '/meetup/request-meetup',
             'active' => true
         ],
-        [
-            'label' => 'Requested Meetup',
-            'link' => '/meetup/requested-meetup',
-            'active' => false
-        ]
     ]"/>
 @endsection
 @section('content')
-<h1>Request Meetup</h1>
+<h1>Other Requests</h1>
 <div class="list-group">
     @forelse ($meetupdata as $data)
     <a href="/meetup/request-meetup/{{$data->id}}/process" class="list-group-item list-group-item-action">
@@ -65,9 +60,9 @@
                       </tr>
                     </thead>
                     <tbody>
-                    
+
                         @foreach ($meetupdata as $data)
-                            
+
                         <tr>
                             <td class="text-truncate">{{$data->remarks}}</td>
                             <td class="text-truncate"><a href="">{{ucwords($data->getUserPost()->name)}}</a></td>

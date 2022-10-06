@@ -61,9 +61,13 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    public function notification(){
+    public function notifications(){
 
         return $this->hasMany(Notification::class);
+    }
+
+    public function unreadNotifications() {
+        return $this->notifications()->whereNull('read_at')->get();
     }
     public function likes()
     {
@@ -76,6 +80,6 @@ class User extends Authenticatable
     public function reports(){
 
         return $this->morphToMany(Report::class, 'reportable');
-        
+
     }
 }

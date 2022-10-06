@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meetup;
+use App\Models\Notification;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Validator;
@@ -12,11 +13,11 @@ class MeetupController extends Controller
     //
 
     public function create(Request $request){
-        
+
         $id_post = $request->id_post;
 
         if($id_post){
-            
+
             $posts = Post::whereId($id_post)->first();
 
             if($posts){
@@ -53,7 +54,7 @@ class MeetupController extends Controller
                 'remarks' => 'required'
             ]
         );
-        
+
         if($data->fails()){
 
             return response()->json(
@@ -62,21 +63,21 @@ class MeetupController extends Controller
                      'messages'=>$data->getMessageBag(),
                 ]
             );
- 
+
         }else{
 
             $posts = Post::whereId($request->input('post_id'))->first();
-            
+
             $request['requestor_id'] = auth()->user()->id;
             $request['approver_id'] = $posts->user_id;
 
             if($posts){
-                
+
                 //check if user have already meetup
 
                 $check = $meetup->whereRequestorId($request['requestor_id'])->whereApproverId($request['approver_id'])->wherePostId($request->input('post_id'))->first();
 
-               
+
 
                if($check){
                     return response()->json(
@@ -87,9 +88,14 @@ class MeetupController extends Controller
                     );
                }else{
 
-                // create_notification ...notif here
 
                      $meetup->create($request->all());
+
+                     Notification::create([
+                        'user_id' => $request['approver_id'],
+                        'remarks' => auth()->user()->name. ' sent a meetup request to you.',
+                        'redirect_link' => route('meetup.showrequestedmeetuplist'),
+                    ]);
 
                      return response()->json(
                         [
@@ -100,7 +106,7 @@ class MeetupController extends Controller
 
                }
 
-              
+
             }else{
                 return response()->json(
                     [
@@ -171,9 +177,9 @@ class MeetupController extends Controller
                      'messages'=>$data->getMessageBag(),
                 ]
             );
- 
+
         }else{
-            
+
             $meetupdata = $meetup->whereApproverId($approver_id)->whereId($request->input('meetup_id'))->first();
 
             date_default_timezone_set('Asia/Manila');
@@ -186,7 +192,11 @@ class MeetupController extends Controller
 
                 $meetupdata->save();
 
-                // create_notification ...notif here
+                Notification::create([
+                    'user_id' => $meetupdata->requestor_id,
+                    'remarks' => auth()->user()->name. ' approved your request!',
+                    'redirect_link' => route('meetup.showrequestedmeetuplist'),
+                ]);
 
                 return response()->json(
                     [
@@ -203,7 +213,11 @@ class MeetupController extends Controller
 
                 $meetupdata->save();
 
-                // create_notification ...notif here
+                Notification::create([
+                    'user_id' => $meetupdata->requestor_id,
+                    'remarks' => auth()->user()->name. ' declined your request!',
+                    'redirect_link' => route('meetup.showrequestedmeetuplist'),
+                ]);
 
                 return response()->json(
                     [

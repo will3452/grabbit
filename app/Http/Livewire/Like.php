@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Post;
 use Livewire\Component;
+use App\Models\Notification;
 
 class Like extends Component
 {
@@ -29,6 +30,14 @@ class Like extends Component
 
             //create likes record
             $this->post->likes()->create(['user_id' => auth()->id()]);
+
+            if ($this->post->user_id != auth()->id()) { // send notif if others like your post
+                Notification::create([
+                    'user_id' => $this->post->user_id,
+                    'remarks' => auth()->user()->name. " liked your post!",
+                    'redirect_link' => route('post.show', ['post' => $this->post->id]),
+                ]);
+            }
         }
     }
 

@@ -50,7 +50,7 @@ Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(functi
 
 Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('index');
-    // Route::post('/', [PostController::class, 'store'])->name('store');
+    Route::get('/{post}', [PostController::class, 'show'])->name('show');
 });
 
 //like
@@ -66,7 +66,7 @@ Route::name('profile.')->middleware(['auth'])->prefix('/profile')->group(functio
 //notification
 Route::name('notification.')->middleware(['auth'])->prefix('/notification')->group(function () {
     Route::get('/', [NotificationController::class, 'index'])->name('index');
-    Route::get('/{data}', [NotificationController::class, 'show'])->name('show');
+    Route::get('/{notification}', [NotificationController::class, 'markAsRead'])->name('show');
 });
 
 //follow

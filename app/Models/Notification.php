@@ -13,17 +13,18 @@ class Notification extends Model
         'user_id',
         'remarks',
         'redirect_link',
+        'read_at',
     ];
 
 
     public function user(){
 
         return $this->belongsTo(User::class);
-        
+
     }
     public function create_notification($data_notf){
 
         return auth()->user()->notification()->create($data_notf);
-        
+
     }
 }

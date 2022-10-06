@@ -9,12 +9,19 @@ class NotificationController extends Controller
 {
     //
     public function index(Request $request){
-        $notif = auth()->user()->notification()->latest()->get();// get all notif of auth user
-        return view('notification.index');
+        $notifications = Notification::whereUserId(auth()->id())->latest()->paginate(5);
+        return view('notification.index', compact('notifications'));
     }
-    public function show(Request $request, $data){
-        $notif_data = auth()->user()->notification()->whereId($data)->first(); // find notification for specific auth user
-        // return view('notification.show', compact($notif_data)); //return data in view
-        dd($notif_data);
+    public function markAsRead(Request $request, Notification $notification){
+        $notification->update(['read_at' => now()]);
+
+        $redirectLink = $notification->redirect_link;
+
+        if ($redirectLink == '#' || $redirectLink == '') {
+            return back();
+        }
+
+        return redirect()->to($redirectLink);
     }
+
 }

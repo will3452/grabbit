@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Post;
 use App\Models\Comment as CommentModel;
+use App\Models\Notification;
 use Livewire\Component;
 
 class Comment extends Component
@@ -44,6 +45,15 @@ class Comment extends Component
             'user_id' => auth()->id(),
         ]);
         $this->comment = "";
+
+        if ($this->post->user_id != auth()->id()) {
+            Notification::create([
+                'user_id' => $this->post->user_id,
+                'remarks' => auth()->user()->name . " commented on your post.",
+                'redirect_link' => route('post.show', ['post' => $this->post->id]),
+            ]);
+        }
+
         $this->loadComments();
 
     }

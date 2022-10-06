@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Follow;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class FollowController extends Controller
@@ -16,7 +17,7 @@ class FollowController extends Controller
         $data = $request->validate([
             'following_id' => ['required'],
         ]);
-        
+
         $data['follower_id'] = auth()->id();
 
         $check = $follow->whereFollowerId($data['follower_id'])->whereFollowingId($data['following_id'])->first();
@@ -35,6 +36,12 @@ class FollowController extends Controller
         }else{
             $follow->create($data);
 
+            Notification::create([
+                'user_id' => $data['following_id'],
+                'remarks' => auth()->user()->name . ' Followed you!',
+                'redirect_link' => '#',
+            ]);
+
             return response()->json(
                 [
                     'status'=>200,
@@ -43,6 +50,6 @@ class FollowController extends Controller
                 ]
             );
         }
-     
+
     }
 }
