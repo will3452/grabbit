@@ -107,7 +107,7 @@
                             <div class="dropdown-header bg-light py-2">
                                 <div class="fw-semibold">Account</div>
                             </div><a
-                                class="dropdown-item" href="#">
+                                class="dropdown-item" href="/convo">
                                 <svg class="icon me-2">
                                     <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
                                 </svg> Messages<span class="badge badge-sm bg-success ms-2">42</span></a><a

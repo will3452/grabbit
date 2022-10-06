@@ -47,7 +47,7 @@ $(document).ready(function(){
                 else{
                     console.log(data);
                     $(".btn-primary").text('Create Meetup');
-                    alert(data.messages);
+                    window.location.href = "/meetup/requested-meetup";
                 }
              
             }

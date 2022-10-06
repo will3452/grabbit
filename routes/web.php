@@ -92,6 +92,7 @@ Route::name('meetup.')->middleware(['auth'])->prefix('/meetup')->group(function 
 
 Route::name('message.')->middleware(['auth'])->prefix('/convo')->group(function () {
     Route::get('/message/{read_by}', [ConversationController::class, 'index'])->name('index');
+    Route::get('/', [ConversationController::class, 'conversations'])->name('conversations');
 });
 
 //report
