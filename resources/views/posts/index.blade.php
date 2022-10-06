@@ -17,7 +17,7 @@
 @section('content')
     <div class="card mt-3">
         <div class="card-header">Search Post</div>
-        <form class="card-body" method="GET" action="">
+        <form class="card-body" method="GET" action="/posts">
             <div class="form-group">
                 <input name="search" type="text" class="form-control" value="{{ $data }}" placeholder="Search...">
             </div>

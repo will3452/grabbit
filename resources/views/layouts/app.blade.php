@@ -60,6 +60,7 @@
     </script>
 
 @livewireStyles
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 </head>
 
 <body>
@@ -82,8 +83,18 @@
                     </svg></a>
                 <ul class="header-nav d-none d-md-flex">
                     <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+
                 </ul>
+
+                <form class="card-body" method="GET" action="/posts">
+                    <div class="form-group d-flex " style="align-items: center;">
+                        <input id="typed4" name="search" type="text" class="form-control" value="" placeholder="Search post">
+                        <button class="mx-2 btn btn-primary">search</button>
+                    </div>
+                </form>
+
                 <ul class="header-nav ms-auto">
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('notification.index')}}">
                             <svg class="icon icon-lg">
@@ -95,11 +106,6 @@
                                 </span>
                             @endif
                         </a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#">
-                        <svg class="icon icon-lg">
-                            <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
-                        </svg></a>
                     </li>
                 </ul>
                 <ul class="header-nav ms-3">
@@ -139,6 +145,7 @@
                                 </svg> Logout</a>
                         </div>
                     </li>
+
                 </ul>
             </div>
             <div class="header-divider"></div>
@@ -165,6 +172,21 @@
     <script src="/vendors/simplebar/js/simplebar.min.js"></script>
     <script></script>
     @livewireScripts
+
+    <script>
+        var typed4 = new Typed('#typed4', {
+            strings: [
+                @foreach(\App\Models\Post::inRandomOrder()->take(10)->get() as $item)
+                    "{{$item->title}}",
+                @endforeach
+            ],
+            typeSpeed: 27,
+            backSpeed: 25,
+            attr: 'placeholder',
+            bindInputFocusEvents: true,
+            loop: true
+        });
+    </script>
 </body>
 
 </html>
