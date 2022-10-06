@@ -149,7 +149,6 @@
         </div>
         <footer class="footer">
             <div><a href="#">Grabbit.</div>
-            <div class="ms-auto">Powered by William And Leo</div>
         </footer>
     </div>
     <!-- CoreUI and necessary plugins-->

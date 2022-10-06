@@ -20,7 +20,7 @@
               <div>
                 <div class="fs-4 fw-semibold">26K <span class="fs-6 fw-normal">(-12.4%
                     <svg class="icon">
-                      <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-arrow-bottom"></use>
+                      <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-arrow-bottom"></use>
                     </svg>)</span></div>
                 <div>Users</div>
               </div>
