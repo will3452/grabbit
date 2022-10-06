@@ -16,6 +16,14 @@
         </a>
      </li>
 
+     <li>
+        <a class="nav-link" href="{{route('post.create')}}">
+            <svg class="nav-icon">
+              <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
+            </svg> Create Post
+        </a>
+     </li>
+
 
           @if(env('UI_HELPER'))
           <li class="nav-title">Theme</li>

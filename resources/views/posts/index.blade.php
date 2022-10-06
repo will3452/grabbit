@@ -15,7 +15,6 @@
     ]"/>
 @endsection
 @section('content')
-    @livewire('post-livewire')
     <div class="card mt-3">
         <div class="card-header">Search Post</div>
         <form class="card-body" method="GET" action="">
