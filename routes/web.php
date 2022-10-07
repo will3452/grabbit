@@ -14,6 +14,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,4 +107,8 @@ Route::name('report.')->middleware(['auth'])->prefix('/report')->group(function 
 //search general
 Route::name('src.')->middleware(['auth'])->prefix('/result')->group(function () {
     Route::get('/', [SearchController::class, 'index'])->name('index');
+});
+
+Route::prefix('review')->name('review.')->group(function () {
+    Route::post('/', [ReviewController::class, 'store'])->name('store');
 });

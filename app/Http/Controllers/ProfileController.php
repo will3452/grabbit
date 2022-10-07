@@ -6,6 +6,7 @@ use App\Models\Follow;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -22,7 +23,9 @@ class ProfileController extends Controller
         $posts = Post::whereUserId($profile->user_id)->latest()->simplePaginate(4);
         $followersCount = Follow::whereFollowingId($request->user_id)->count();
         $postsCount = Post::whereUserId($profile->user_id)->count();
-        return view('profile.show', compact('user', 'profile', 'posts', 'followersCount', 'postsCount'));
+        $reviews = Review::whereUserId($request->user_id)->latest()->simplePaginate(3);
+        $averageStar = Review::whereUserId($request->user_id)->average('star');
+        return view('profile.show', compact('user', 'profile', 'posts', 'followersCount', 'postsCount', 'reviews', 'averageStar'));
     }
     public function update(Request $request){
         $data = $request->validate(

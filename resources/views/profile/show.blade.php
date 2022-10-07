@@ -42,9 +42,29 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <x-review-stars></x-review-stars>
+                    <x-review-stars :value="$averageStar"></x-review-stars>
                 </div>
                 @livewire('follow-on-profile', ['user' => $profile->user_id], key($profile->user_id))
+                <div class="mt-2 text-center">
+                    <x-modal modalTitle="Write Review" modalTrigger="WRITE REVIEW">
+                        <form action="{{route('review.store')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{$profile->user_id}}">
+                            <textarea name="remarks"  required class="form-control" placeholder="Remarks"></textarea>
+                            <div class="mt-4">
+                                <select class="form-select" name="star" id="" required>
+                                    <option value="" selected disabled> SELECT STAR</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary mt-4">Submit Review</button>
+                        </form>
+                    </x-modal>
+                </div>
             </div>
         </div>
         <div class="row mt-2">
@@ -103,9 +123,13 @@
             </div>
             <div class="card-body">
                 <ul class="list-group">
-                    <x-review-item></x-review-item>
-                    <x-review-item></x-review-item>
+                    @foreach ($reviews as $review)
+                        <x-review-item :review="$review"></x-review-item>
+                    @endforeach
                 </ul>
+                <div class="mt-4 d-flex justify-content-end">
+                    {{$reviews->links()}}
+                </div>
             </div>
         </div>
     </div>
