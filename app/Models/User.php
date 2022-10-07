@@ -56,7 +56,10 @@ class User extends Authenticatable
 
         return $this->hasOne(Profile::class);
     }
-
+    public function CheckUserBlock(){
+        $block = Block::where('blocked_id', $this->id)->where('user_id', auth()->user()->id)->first();
+        return $block;
+    }
     public function posts () {
         return $this->hasMany(Post::class);
     }

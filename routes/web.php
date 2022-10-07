@@ -1,18 +1,19 @@
 <?php
 
-use App\Http\Controllers\BlockController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ConversationController;
-use App\Http\Controllers\FollowController;
-use App\Http\Controllers\LikeController;
-use App\Http\Controllers\MeetupController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReportController;
 use App\Models\Conversation;
 use App\Models\Notification;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\BlockController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\MeetupController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,7 @@ Route::name('like.')->middleware(['auth'])->prefix('/like')->group(function () {
 //prorile
 Route::name('profile.')->middleware(['auth'])->prefix('/profile')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('index');
+    Route::get('/show/{user_id}', [ProfileController::class, 'show'])->name('show');
     Route::patch('/{user_id}', [ProfileController::class, 'update'])->name('index');
 });
 //notification
@@ -99,4 +101,9 @@ Route::name('message.')->middleware(['auth'])->prefix('/convo')->group(function 
 //report
 Route::name('report.')->middleware(['auth'])->prefix('/report')->group(function () {
     Route::get('/{report_type}/{report_id}', [ReportController::class, 'index'])->name('index');
+});
+
+//search general
+Route::name('src.')->middleware(['auth'])->prefix('/result')->group(function () {
+    Route::get('/', [SearchController::class, 'index'])->name('index');
 });

@@ -86,7 +86,7 @@
 
                 </ul>
 
-                <form class="card-body" method="GET" action="/posts">
+                <form class="card-body" method="GET" action="/result">
                     <div class="form-group d-flex " style="align-items: center;">
                         <input id="typed4" name="search" type="text" class="form-control" value="" placeholder="Search post">
                         <button class="mx-2 btn btn-primary">search</button>

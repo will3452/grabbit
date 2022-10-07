@@ -13,6 +13,11 @@ class ProfileController extends Controller
         // $profile = Profile::where('user_id', auth()->user()->id)->first();
         return view('profile.index', compact('user', 'profile'));
     }
+    public function show(Request $request){
+        $user = User::where('id', $request->user_id)->first();
+        $profile = $user->profile()->first();
+        return view('profile.show', compact('user', 'profile'));
+    }
     public function update(Request $request){
         $data = $request->validate(
                 [
