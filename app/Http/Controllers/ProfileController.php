@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Follow;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Http\Request;
@@ -16,7 +19,10 @@ class ProfileController extends Controller
     public function show(Request $request){
         $user = User::where('id', $request->user_id)->first();
         $profile = $user->profile()->first();
-        return view('profile.show', compact('user', 'profile'));
+        $posts = Post::whereUserId($profile->user_id)->latest()->simplePaginate(4);
+        $followersCount = Follow::whereFollowingId($request->user_id)->count();
+        $postsCount = Post::whereUserId($profile->user_id)->count();
+        return view('profile.show', compact('user', 'profile', 'posts', 'followersCount', 'postsCount'));
     }
     public function update(Request $request){
         $data = $request->validate(
@@ -37,7 +43,7 @@ class ProfileController extends Controller
         else{
             $imagepath = auth()->user()->profile->avatar;
         }
-        
+
         auth()->user()->update([
             'name' => $data['name']                  //uodate user data
         ]);

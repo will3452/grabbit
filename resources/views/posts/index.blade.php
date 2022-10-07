@@ -42,7 +42,7 @@
                             </a>
                         </div>
                     @endif
-                    <div>{{ucfirst($post->getUserPost()->name)}}</div>
+                    <a href="{{route('profile.show', ['user_id' => $post->user_id])}}">{{ucfirst($post->getUserPost()->name)}}</a>
                     @if (!$post->checkUserAuthPost())
                     <form class="followform " method="POST">
                         @csrf
