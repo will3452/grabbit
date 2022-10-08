@@ -14262,3 +14262,119 @@ html:not([dir=rtl]) .wrapper {
   border: 1px solid #787878;
   font-weight: 600;
 }
+.block-user{
+  position: relative;
+  text-decoration: none;
+}
+.block-user > .hover-block{
+  visibility: hidden;
+  position: absolute;
+  top:-38px;
+  left:-28px;
+  color:#fff;
+  padding:5px 7px;
+  border-radius: 5px;
+  width: auto;
+  background-color: darkred;
+  white-space: nowrap;
+}
+.block-user:hover .hover-block{
+  visibility: visible;
+}
+.block-user > .icon-lg{
+  color:#636f83;
+}
+.follow-user{
+  position: relative;
+  text-decoration: none;
+}
+.follow-user > .hover-follow{
+  visibility: hidden;
+  position: absolute;
+  top:-38px;
+  left:-32px;
+  color:#fff;
+  padding:5px 7px;
+  border-radius: 5px;
+  width: auto;
+  background-color: #1f913b;
+  white-space: nowrap;
+}
+.follow-user:hover .hover-follow{
+  visibility: visible;
+}
+.follow-user > .icon-lg{
+  color:#636f83;
+}
+
+
+.unfollow-user{
+  position: relative;
+  text-decoration: none;
+}
+.unfollow-user > .hover-unfollow{
+  visibility: hidden;
+  position: absolute;
+  top:-38px;
+  left:-35px;
+  color:#fff;
+  padding:5px 7px;
+  border-radius: 5px;
+  width: auto;
+  background-color: #1f913b;
+  white-space: nowrap;
+}
+.unfollow-user:hover .hover-unfollow{
+  visibility: visible;
+}
+.unfollow-user > .icon-lg{
+  color:#636f83;
+}
+
+
+.message-user{
+  position: relative;
+  text-decoration: none;
+}
+.message-user > .hover-message{
+  visibility: hidden;
+  position: absolute;
+  top:-35px;
+  left:-23px;
+  color:#fff;
+  padding:5px 7px;
+  border-radius: 5px;
+  width: auto;
+  background-color: #1f913b;
+  white-space: nowrap;
+}
+.message-user:hover .hover-message{
+  visibility: visible;
+}
+.message-user > .icon-lg{
+  color:#636f83;
+}
+
+
+.report-user{
+  position: relative;
+  text-decoration: none;
+}
+.report-user > .hover-report{
+  visibility: hidden;
+  position: absolute;
+  top:-37px;
+  left:-23px;
+  color:#fff;
+  padding:5px 7px;
+  border-radius: 5px;
+  width: auto;
+  background-color: darkred;
+  white-space: nowrap;
+}
+.report-user:hover .hover-report{
+  visibility: visible;
+}
+.report-user > .icon-lg{
+  color:#636f83;
+}

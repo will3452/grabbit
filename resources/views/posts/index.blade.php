@@ -34,24 +34,35 @@
             <div class="card-header d-flex justify-content-between align-items-baseline">
                 <div class="d-flex align-items-baseline">
                     @if (!$post->checkUserAuthPost())
-                        <div style="margin-right:-10px;">
+                        <div style="margin-right:-10px;" class="message-user">
                             <a class="header-brand" href="/convo/message/{{$post->getProfilePost()->id}}">
                                 <svg class="icon icon-lg">
                                     <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-comment-square"></use>
                                 </svg>
                             </a>
+                            <span class="hover-message">Message</span>
                         </div>
                     @endif
                     <a href="{{route('profile.show', ['user_id' => $post->user_id])}}">{{ucfirst($post->getUserPost()->name)}}</a>
                     @if (!$post->checkUserAuthPost())
-                    <form class="followform " method="POST">
+                    <form class="followform" method="POST">
                         @csrf
                         <input type="hidden" value="{{$post->getProfilePost()->id}}" name="following_id">
 
                         @if ($post->checkUserFollowStatus())
-                            <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">Unfollow</button>
+                            <button class="btn-link outline-none unfollow-user btn-fl {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">
+                                <svg class="icon icon-lg">
+                                    <use class="{{'followinc_'.$post->getProfilePost()->id}}" xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-user-unfollow"></use>
+                                </svg>
+                                <span class="hover-unfollow {{'followspn_'.$post->getProfilePost()->id}}">Unfollow User</span>
+                            </button>
                         @else
-                            <button class="btn-link outline-none {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">Follow</button>
+                            <button class="btn-link outline-none follow-user btn-fl {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">
+                                <svg class="icon icon-lg">
+                                    <use class="{{'followinc_'.$post->getProfilePost()->id}}" xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-user-follow"></use>
+                                </svg>
+                                <span class="hover-follow {{'followspn_'.$post->getProfilePost()->id}}">Follow User</span>
+                            </button>
                         @endif
                     </form>
                     @endif
@@ -60,7 +71,12 @@
                         <form class="blockform" method="POST">
                             @csrf
                             <input type="hidden" value="{{$post->user_id}}" name="blocked_id">
-                            <button class="btn-link outline-none" type="submit">Block</button>
+                            <button class="btn-link outline-none block-user" type="submit">
+                                <svg class="icon icon-lg">
+                                    <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-ban"></use>
+                                </svg>
+                                <span class="hover-block">Block User</span>
+                            </button>
                         </form>
                     @endif
                 </div>
@@ -93,12 +109,13 @@
                         <livewire:like :post="$post->id" :key="$post->id">
                     </div>
                     @if (!$post->checkUserAuthPost())
-                    <div>
+                    <div class="report-user">
                         <a href="/report/post/{{$post->id}}" class="reports">
                             <svg class="icon icon-lg">
                                 <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-flag-alt"></use>
                             </svg>
                         </a>
+                        <span class="hover-report">Report</span>
                     </div>
                     @endif
                 </div>
