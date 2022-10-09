@@ -45,6 +45,9 @@
                     <x-review-stars :value="$averageStar"></x-review-stars>
                 </div>
                 @livewire('follow-on-profile', ['user' => $profile->user_id], key($profile->user_id))
+                <div class="d-flex justify-content-center mt-2 mb-2">
+                    <a href="/convo/message/{{$profile->user_id}}" class="btn btn-primary">Message</a>
+                </div>
                 <div class="mt-2 text-center">
                     <x-modal modalTitle="Write Review" modalTrigger="WRITE REVIEW">
                         <form action="{{route('review.store')}}" method="POST">

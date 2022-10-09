@@ -24,10 +24,14 @@ class MeetupController extends Controller
 
                 if(!$posts->checkUserAuthPost()){
 
+                    // dd($posts->user_id);
+                    if($posts->CheckUserBlock()){
+                          return redirect()->route('home');
+                    }
                     return view('meetup.create', compact('posts'));
 
                 }else{
-
+                    
                     return redirect('/posts');
                 }
 
@@ -94,7 +98,7 @@ class MeetupController extends Controller
                      Notification::create([
                         'user_id' => $request['approver_id'],
                         'remarks' => auth()->user()->name. ' sent a meetup request to you.',
-                        'redirect_link' => route('meetup.showrequestedmeetuplist'),
+                        'redirect_link' => route('meetup.showrequestmeetuplist'),
                     ]);
 
                      return response()->json(
@@ -123,9 +127,15 @@ class MeetupController extends Controller
         $meetup = new Meetup;
 
         $approver_id = auth()->user()->id;
+        // $meet = $meetup->whereApproverId($approver_id)->get();
+        // foreach($meet as $item){
+        //     if(!$item->CheckUserBlock()){
+        //        $meetupdata = $meetup->whereApproverId($approver_id)->whereRequestorId($item->requestor_id)->latest()->take(25)->paginate(5);
+        //     }
+        // }
+        // $meetupdata = $meetup->whereApproverId($approver_id)->whereRequestorId($reqid[])->latest()->take(25)->paginate(5);
 
-        $meetupdata = $meetup->whereApproverId($approver_id)->latest()->take(25)->paginate(5);
-
+        $meetupdata = $meetup->whereApproverId($approver_id)->latest()->take(25)->paginate(15);
         return view('meetup.request_meetup' ,compact('meetupdata'));
 
     }
@@ -150,6 +160,9 @@ class MeetupController extends Controller
 
         if($meetupdata){
 
+            if($meetupdata->CheckUserBlock()){
+               abort(404);
+            }
             return view('meetup.process', compact('meetupdata'));
 
         }else{

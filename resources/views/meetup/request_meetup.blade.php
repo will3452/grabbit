@@ -18,21 +18,23 @@
 <h1>Other Requests</h1>
 <div class="list-group">
     @forelse ($meetupdata as $data)
-    <a href="/meetup/request-meetup/{{$data->id}}/process" class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{$data->getPost()->title}}
-                @if ($data->approved_at)
-                    <span class="badge badge-sm bg-success" >Approved</span>
-                @endif
+        @if (!$data->CheckUserBlock())
+            <a href="/meetup/request-meetup/{{$data->id}}/process" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{$data->getPost()->title}}
+                        @if ($data->approved_at)
+                            <span class="badge badge-sm bg-success" >Approved</span>
+                        @endif
 
-                @if ($data->declined_at)
-                    <span class="badge badge-sm bg-danger" >Declined</span>
-                @endif
-            </h5>
-            <small class="text-muted">{{$data->created_at->diffForHumans()}}</small>
-        </div>
-        <small class="text-muted">{{$data->remarks}}</small>
-    </a>
+                        @if ($data->declined_at)
+                            <span class="badge badge-sm bg-danger" >Declined</span>
+                        @endif
+                    </h5>
+                    <small class="text-muted">{{$data->created_at->diffForHumans()}}</small>
+                </div>
+                <small class="text-muted">{{$data->remarks}}</small>
+            </a>
+            @endif
     @empty
     <a class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
@@ -40,6 +42,9 @@
         </div>
         </a>
     @endforelse
+    <div class="mt-4">
+            {{$meetupdata->links()}}
+    </div>
 </div>
 
         {{-- <div class="card mt-2">

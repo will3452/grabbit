@@ -46,7 +46,14 @@ class Conversation extends Model
 
         return $profile;
     }
-
+    public function CheckUserBlock($id_block){
+        $block1 = Block::where('blocked_id', $id_block)->where('user_id', auth()->user()->id)->exists();
+        $block2 = Block::where('blocked_id', auth()->user()->id)->where('user_id', $id_block)->exists();
+        if($block1 || $block2){
+            return false;
+        }
+        return true;
+    }
     public function messages(){
 
         $this->hasMany(Message::class);

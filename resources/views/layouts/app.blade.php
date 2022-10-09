@@ -134,6 +134,11 @@
                                         <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-task"></use>
                                     </svg> Others Request
                                 </a>
+                                <a class="dropdown-item" href="{{route('block.blockuserlist')}}">
+                                    <svg class="icon me-2">
+                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-user-x"></use>
+                                    </svg> Block Users
+                                </a>
 
                             <div class="dropdown-header bg-light py-2">
                             </div><a class="dropdown-item" href="/profile">

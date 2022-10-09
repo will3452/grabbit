@@ -43,4 +43,14 @@ class Meetup extends Model
 
         return $post;
     }
+    public function CheckUserBlock(){
+        $block1 = Block::where('blocked_id', $this->approver_id)->where('user_id', auth()->user()->id)->exists();
+        $block2 = Block::where('blocked_id', auth()->user()->id)->where('user_id', $this->approver_id)->exists();
+        $block3 = Block::where('blocked_id', $this->requestor_id)->where('user_id', auth()->user()->id)->exists();
+        $block4 = Block::where('blocked_id', auth()->user()->id)->where('user_id', $this->requestor_id)->exists();
+        if($block1 || $block2 || $block3 || $block4){
+            return true;
+        }
+        return false;
+    }
 }

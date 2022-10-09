@@ -71,9 +71,12 @@ class Post extends Model
     }
     public function CheckUserBlock(){
 
-        $block = Block::where('blocked_id', $this->user_id)->where('user_id', auth()->user()->id)->first();
-
-        return $block;
+        $block1 = Block::where('blocked_id', $this->user_id)->where('user_id', auth()->user()->id)->exists();
+        $block2 = Block::where('blocked_id', auth()->user()->id)->where('user_id', $this->user_id)->exists();
+        if($block1 || $block2){
+            return true;
+        }
+        return false;
     }
     public function getCommentsCount () {
         return Comment::whereModelType('\\App\\Models\\Post')->whereModelId($this->id)->count();

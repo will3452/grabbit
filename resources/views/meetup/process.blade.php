@@ -60,7 +60,7 @@
                 <span class="text-danger process" style="font-size:15px; font-weight:700; margin-left:2px;"></span>
             </div>
             <div class="mt-2 form-group" style="text-align:right !important;">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary metupssbtn">
                     Process Meetup
                 </button>
             </div>

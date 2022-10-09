@@ -19,7 +19,7 @@ $(document).ready(function(){
     $("#create_meetup").on('submit', function(e){
         // just to make response fast in the ui side
         let payload = new FormData(this)
-        $(".btn-primary").text('loading...');
+        $(".metupssbtn").text('loading...');
         
         e.preventDefault();
         $.ajax({
@@ -33,7 +33,7 @@ $(document).ready(function(){
                 if(data.status == 400){
                     error_handling('meetup_date', data.messages.meetup_date);
                     error_handling('remarks', data.messages.remarks);
-                    $(".btn-primary").text('Create Meetup');
+                    $(".metupssbtn").text('Create Meetup');
                     console.log(data);
                 }else if(data.status == 404){
                     error_handling('meetup_date', data.messages);
@@ -42,11 +42,11 @@ $(document).ready(function(){
                         .removeClass('is-valid')
                     $(".remarks").text('')
                     console.log(data);
-                    $(".btn-primary").text('Create Meetup');
+                    $(".metupssbtn").text('Create Meetup');
                 }
                 else{
                     console.log(data);
-                    $(".btn-primary").text('Create Meetup');
+                    $(".metupssbtn").text('Create Meetup');
                     window.location.href = "/meetup/requested-meetup";
                 }
              
@@ -58,7 +58,7 @@ $(document).ready(function(){
     $("#process_meetup").on('submit', function(e){
         // just to make response fast in the ui side
         let payload = new FormData(this)
-        $(".btn-primary").text('loading...');
+        $(".metupssbtn").text('loading...');
         var form = this;
         e.preventDefault();
         $.ajax({
@@ -71,11 +71,11 @@ $(document).ready(function(){
             success:function(data){
                 if(data.status == 400){
                     error_handling('process', data.messages.process);
-                    $(".btn-primary").text('Process Meetup');
+                    $(".metupssbtn").text('Process Meetup');
                     console.log(data);
                 }else if(data.status == 404){
                     error_handling('process', data.messages);
-                    $(".btn-primary").text('Process Meetup');
+                    $(".metupssbtn").text('Process Meetup');
                     console.log(data);
                 }else{
                     

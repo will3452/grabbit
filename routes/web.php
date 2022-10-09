@@ -65,7 +65,7 @@ Route::name('like.')->middleware(['auth'])->prefix('/like')->group(function () {
 Route::name('profile.')->middleware(['auth'])->prefix('/profile')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('index');
     Route::get('/show/{user_id}', [ProfileController::class, 'show'])->name('show');
-    Route::patch('/{user_id}', [ProfileController::class, 'update'])->name('index');
+    Route::patch('/{user_id}', [ProfileController::class, 'update'])->name('update');
 });
 //notification
 Route::name('notification.')->middleware(['auth'])->prefix('/notification')->group(function () {
@@ -80,6 +80,9 @@ Route::name('follow.')->middleware(['auth'])->prefix('/follows')->group(function
 
 Route::name('block.')->middleware(['auth'])->prefix('/blocks')->group(function () {
     Route::post('/', [BlockController::class, 'block'])->name('block');
+    Route::get('/users', [BlockController::class, 'index'])->name('blockuserlist');
+    Route::get('/users/{user_id}/update', [BlockController::class, 'edit'])->name('unblockuserform');
+    Route::post('/users/destroy', [BlockController::class, 'destroy'])->name('destroy');
 });
 //meetup
 Route::name('meetup.')->middleware(['auth'])->prefix('/meetup')->group(function () {

@@ -26,6 +26,9 @@ class MessageLivewire extends Component
     public function mount(){
 
         $this->user = User::find($this->read_by);
+        if($this->user->CheckUserBlock()){
+            abort(404);
+        }
 
         $this->profile_reader = $this->user->profile()->first();
         
@@ -36,8 +39,11 @@ class MessageLivewire extends Component
             $this->AllMessages = Message::where('conversation_id', $this->conversation_id)->get();
 
         }
+     
     }
-
+    public function redTo(){
+        return redirect()->route('post.index');
+    }
     public function checkMessages(){
 
         return Message::where([['created_by', $this->created_by], ['read_by', $this->read_by]])

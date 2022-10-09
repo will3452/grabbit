@@ -43,22 +43,26 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function boot(){
+    // public static function boot(){
 
-        parent::boot();
+    //     parent::boot();
 
-        static::created(function ($user){
-            $user->profile()->create();
-        });
-    }
+    //     static::created(function ($user){
+    //         $user->profile()->create();
+    //     });
+    // }
 
     public function profile(){
 
         return $this->hasOne(Profile::class);
     }
     public function CheckUserBlock(){
-        $block = Block::where('blocked_id', $this->id)->where('user_id', auth()->user()->id)->first();
-        return $block;
+            $block1 = Block::where('blocked_id', $this->id)->where('user_id', auth()->user()->id)->exists();
+            $block2 = Block::where('blocked_id', auth()->user()->id)->where('user_id', $this->id)->exists();
+            if($block1 || $block2){
+                return true;
+            }
+            return false;
     }
     public function posts () {
         return $this->hasMany(Post::class);

@@ -25,6 +25,9 @@ class ProfileController extends Controller
         $postsCount = Post::whereUserId($profile->user_id)->count();
         $reviews = Review::whereUserId($request->user_id)->latest()->simplePaginate(3);
         $averageStar = Review::whereUserId($request->user_id)->average('star');
+        if($user->CheckUserBlock()){
+            return redirect()->route('home');
+        }
         return view('profile.show', compact('user', 'profile', 'posts', 'followersCount', 'postsCount', 'reviews', 'averageStar'));
     }
     public function update(Request $request){

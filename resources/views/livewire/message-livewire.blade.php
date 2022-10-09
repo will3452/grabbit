@@ -16,7 +16,7 @@
        </div>
     </div>
 
-    <div wire:poll.7000="getAllMessages" class="card-body chatbox start-scrollbuttom" id="messageBody">
+    <div wire:poll.50000ms="getAllMessages" class="card-body chatbox start-scrollbuttom" id="messageBody">
         @if ($AllMessages)
             @foreach ($AllMessages as $message)
                 <div class="chat  @if ($message->created_by == $created_by) sender @else reciever @endif">

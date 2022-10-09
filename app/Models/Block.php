@@ -13,7 +13,18 @@ class Block extends Model
         'blocked_id',
         'blocker_id'
     ];
+    public function getUser(){ //get user data of post user
 
+        $user = User::whereId($this->blocked_id)->first();
+
+        return $user;
+    }
+    public function getProfile(){ //get profile of the poser
+
+        $profile = Profile::whereUserId($this->blocked_id)->first();
+
+        return $profile;
+    }
     public function user(){
 
         return $this->belongsTo(User::class);
