@@ -18,7 +18,7 @@
         <h1>My Request</h1>
         <div class="list-group">
             @forelse ($meetupdata as $data)
-                 @if (!$data->CheckUserBlock())
+                 {{-- @if (!$data->CheckUserBlock()) --}}
                         <a class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">{{$data->getPost()->title}}
@@ -35,7 +35,7 @@
                         <p class="mb-1">{{ucwords($data->getUserRequested()->name)}}</p>
                         <small class="text-muted">{{$data->remarks}}</small>
                         </a>
-                        @endif
+                        {{-- @endif --}}
             @empty
             <a class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
