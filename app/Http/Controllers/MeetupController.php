@@ -123,30 +123,38 @@ class MeetupController extends Controller
         }
     }
     public function showrequestmeetuplist(Request $request){
-
         $meetup = new Meetup;
-
         $approver_id = auth()->user()->id;
-        // $meet = $meetup->whereApproverId($approver_id)->get();
-        // foreach($meet as $item){
-        //     if(!$item->CheckUserBlock()){
-        //        $meetupdata = $meetup->whereApproverId($approver_id)->whereRequestorId($item->requestor_id)->latest()->take(25)->paginate(5);
-        //     }
-        // }
+        $meet = $meetup->whereApproverId($approver_id)->get();
+        $meetupid = [];
+        foreach($meet as $item){
+            if(!$item->CheckUserBlock()){
+                    $meetupid[] = $item->id;
+            }
+        }
+        $meetdata = $meetupid;
+        $meetupdata = $meetup->whereApproverId($approver_id)->whereIn('id', $meetdata)->latest()->take(25)->paginate(15);
+        return view('meetup.request_meetup' ,compact('meetupdata'));
+
         // $meetupdata = $meetup->whereApproverId($approver_id)->whereRequestorId($reqid[])->latest()->take(25)->paginate(5);
 
-        $meetupdata = $meetup->whereApproverId($approver_id)->latest()->take(25)->paginate(15);
-        return view('meetup.request_meetup' ,compact('meetupdata'));
+        // $meetupdata = $meetup->whereApproverId($approver_id)->latest()->take(25)->paginate(15);
+        // return view('meetup.request_meetup' ,compact('meetupdata'));
 
     }
     public function showrequestedmeetuplist(Request $request){
-
         $meetup = new Meetup;
-
         $authid = auth()->user()->id;
-
-        $meetupdata = $meetup->whereRequestorId($authid)->latest()->take(25)->paginate(5);
-
+        $meet = $meetup->whereRequestorId($authid)->get();
+        $meetupid = [];
+        foreach($meet as $item){
+            if(!$item->CheckUserBlock()){
+                $meetupid[] =  $item->id;
+            }
+        }
+        $meetdata = $meetupid;
+        $meetupdata = $meetup->whereRequestorId($authid)->whereIn('id', $meetdata)->latest()->take(25)->paginate(5);
+        // dd($meetupdata);
         return view('meetup.requested_meetup' ,compact('meetupdata'));
 
     }

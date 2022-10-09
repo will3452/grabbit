@@ -61,6 +61,9 @@
                                 <a href="/convo/message/{{$post->getProfilePost()->id}}"><button class="letter_spacing">Message</button></a>
                             </div>
                             <div>
+                                <a href="/meetup/create/{{$post->id}}"><button class="letter_spacing">Request Meetup</button></a>
+                            </div>
+                            <div>
                                 <a href="/report/post/{{$post->id}}"><button class="letter_spacing">Report</button></a>
                             </div>
                         </div>
