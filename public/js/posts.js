@@ -59,20 +59,14 @@ $(document).ready(function(){
             contentType:false,
             success:function(data){
                 if(data.messages=='Follow'){
-                    $('.followbtn_'+data.followed_id).addClass('unfollow-user')
-                    $('.followbtn_'+data.followed_id).removeClass('follow-user')
-                    $('.followspn_'+data.followed_id).addClass('hover-unfollow')
-                    $('.followspn_'+data.followed_id).removeClass('hover-follow')
-                    $('.followspn_'+data.followed_id).text('Unfollow User')
-                    $('.followinc_'+data.followed_id).attr("xlink:href", '/vendors/@coreui/icons/svg/free.svg#cil-user-unfollow')
+                    $('.followbtn_'+data.followed_id).text('Unfollow')
+                    $(".alert-show").show();
+                    $(".alert-messages").text(data.messages);
                     console.log(data);
                 }else if(data.messages=='Unfollow'){
-                    $('.followbtn_'+data.unfollowed_id).addClass('follow-user')
-                    $('.followbtn_'+data.unfollowed_id).removeClass('unfollow-user')
-                    $('.followspn_'+data.unfollowed_id).removeClass('hover-unfollow')
-                    $('.followspn_'+data.unfollowed_id).addClass('hover-follow')
-                    $('.followspn_'+data.unfollowed_id).text('Follow User')
-                    $('.followinc_'+data.unfollowed_id).attr("xlink:href", '/vendors/@coreui/icons/svg/free.svg#cil-user-follow')
+                    $(".alert-show").show();
+                    $(".alert-messages").text(data.messages);
+                    $('.followbtn_'+data.unfollowed_id).text('Follow')
                     console.log(data);
                 }
             }
@@ -96,5 +90,12 @@ $(document).ready(function(){
                 }
             }
         });
+    });
+    $(document).on('click','.post_process_dot', function(){
+        $(this).children('.show_acton_dot').toggleClass('toggle');
+    });
+    $("body").mouseup(function(){ 
+        $(".show_acton_dot").addClass('toggle');
+        $(".alert-dismissible").hide();
     });
   });

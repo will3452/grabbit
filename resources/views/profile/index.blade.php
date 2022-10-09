@@ -76,7 +76,7 @@
             </div>
 
            <div class="mb-2 mt-2">
-                <label for="phone">Phone</label>
+                <label for="phone">Contact number</label>
                 <div class="form-group">
                     <input  name="phone" type="number" class="form-control @error('phone') is-invalid @enderror" value="{{old('phone', $profile->phone)}}"  placeholder="Phone">
                 </div>
@@ -98,7 +98,7 @@
                 @enderror
            </div>
            <div class="mb-2 mt-2">
-                <label for="descriptions">Description</label>
+                <label for="descriptions">Additional Information</label>
                 <div class="form-group">
                     <textarea  name="descriptions" placeholder="Descriptions" class="form-control @error('descriptions') is-invalid @enderror" id="description" rows="3">{{old('descriptions', $profile->description)}}</textarea>
                 </div>

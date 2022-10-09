@@ -108,22 +108,25 @@
                             @endif
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('message.conversations')}}">
+                            <svg class="icon me-2">
+                                <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
+                            </svg>
+                        </a>
+                    </li>
                 </ul>
                 <ul class="header-nav ms-3">
                     <li class="nav-item dropdown"><a class="nav-link py-0" data-coreui-toggle="dropdown" href="#"
                             role="button" aria-haspopup="true" aria-expanded="false">
-                            <div class="avatar avatar-md"><img class="avatar-img" src="/storage/{{auth()->user()->profile->avatar}}"
-                                    alt="Profile Picture"></div>
+                            <div class="avatar avatar-md">
+                                <img class="avatar-img-nav" src="/storage/{{auth()->user()->profile->avatar}}"alt="Profile Picture">
+                            </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pt-0">
                             <div class="dropdown-header bg-light py-2">
                                 <div class="fw-semibold">Account</div>
                             </div>
-                                <a class="dropdown-item" href="/convo">
-                                    <svg class="icon me-2">
-                                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
-                                    </svg> Messages
-                                </a>
                                 <a class="dropdown-item" href="{{route('meetup.showrequestedmeetuplist')}}">
                                     <svg class="icon me-2">
                                         <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-task"></use>

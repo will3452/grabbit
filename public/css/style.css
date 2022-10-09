@@ -14378,3 +14378,85 @@ html:not([dir=rtl]) .wrapper {
 .report-user > .icon-lg{
   color:#636f83;
 }
+.post_process_dot{
+  position: relative;
+}
+.post_process_dot > .toggle{
+  visibility: hidden;
+}
+.post_process_dot > .show_acton_dot{
+  position: absolute;
+  top:-1em;
+  right: 2.5em;
+  color:#fff;
+  padding:30px 15px;
+  border-radius: 15px;
+  width: auto;
+  display: block;
+  width: 13em;
+  background: #fff;
+  box-shadow: -12px -11px 83px -24px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -12px -11px 83px -24px rgba(0,0,0,0.75);
+  -moz-box-shadow: -12px -11px 83px -24px rgba(0,0,0,0.75);
+}.post_process_dot > .show_acton_dot > form > button{
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  font-size: 16px;
+  background-color: #fff;
+  padding:8px 3px;
+  border: solid 1px rgba(0,0,0,0.75);
+}.post_process_dot > .show_acton_dot > form > button:hover{
+  background: #1f913b;
+  color:#fff;
+  border: solid 1px #fff;
+}
+.post_process_dot > .show_acton_dot > div > a > button{
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 50px;
+  font-size: 16px;
+  background-color: #fff;
+  padding:8px 3px;
+  border: solid 1px rgba(0,0,0,0.75);
+}.post_process_dot > .show_acton_dot > div > a > button:hover{
+  background: #1f913b;
+  color:#fff;
+  border: solid 1px #fff;
+}
+
+.post-image-div{
+  width: 100%;
+  margin: 15px 0;
+  height: auto;
+  text-align: center;
+}.post-image-div a img{
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.description_post{
+  width: 100;
+  background: #fff;
+  color:#000015;
+}
+.letter_spacing{
+  letter-spacing: 1px;
+}
+.padding_post{
+   padding:5px 15px;
+}
+@media screen and (max-width: 750px) {
+  .post-image-div a img{
+    height: auto;
+    object-fit: inherit;
+  }
+}
+.avatar-img-nav{
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50px;
+  border: 1px solid #787878;
+}
