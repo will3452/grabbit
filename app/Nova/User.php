@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\Approve;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Date;
@@ -9,6 +10,7 @@ use Laravel\Nova\Fields\Text;
 use App\Nova\Actions\blockUser;
 use App\Nova\Actions\SendNotice;
 use App\Nova\Actions\unblockUser;
+use App\Nova\Filters\ApprovedUser;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -58,6 +60,10 @@ class User extends Resource
     {
         return [
 
+            Date::make('Approved Date', 'approved_at')
+                ->sortable()
+                ->exceptOnForms(),
+
             Date::make('Blocked Date', 'blocked_at')
                 ->sortable()
                 ->exceptOnForms(),
@@ -98,7 +104,9 @@ class User extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            ApprovedUser::make(),
+        ];
     }
 
     /**
@@ -121,6 +129,7 @@ class User extends Resource
     public function actions(Request $request)
     {
         return [
+            Approve::make(),
             blockUser::make(),
             unblockUser::make(),
             SendNotice::make(),

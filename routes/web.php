@@ -115,3 +115,8 @@ Route::name('src.')->middleware(['auth'])->prefix('/result')->group(function () 
 Route::prefix('review')->name('review.')->group(function () {
     Route::post('/', [ReviewController::class, 'store'])->name('store');
 });
+
+Route::get('register-success', function () {
+    toast('Registered succesfully!');
+    return view('register_success');
+});

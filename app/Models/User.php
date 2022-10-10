@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'is_admin',
         'blocked_at',
+        'approved_at',
     ];
 
     /**
@@ -44,6 +45,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'blocked_at' => 'datetime',
+        'approved_at' => 'datetime',
     ];
 
     // public static function boot(){
