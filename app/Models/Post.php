@@ -91,7 +91,7 @@ class Post extends Model
     }
     public function reports(){
 
-        return $this->morphToMany(Report::class, 'reportable');
-        
+        return $this->morphToMany(Report::class, 'reported');
+
     }
 }

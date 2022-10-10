@@ -61,10 +61,11 @@
 
 @livewireStyles
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-@include('sweetalert::alert')
 </head>
 
 <body>
+
+@include('sweetalert::alert')
     <x-sidebar></x-sidebar>
     <div class="alert alert-success alert-dismissible fade show alert-show" role="alert">
         <span class="alert-messages"></span>

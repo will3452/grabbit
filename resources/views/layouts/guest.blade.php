@@ -57,6 +57,8 @@
     </script>
   </head>
   <body>
+
+@include('sweetalert::alert')
     <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
       <div class="container">
         @yield('content')

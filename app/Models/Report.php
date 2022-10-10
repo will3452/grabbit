@@ -18,9 +18,16 @@ class Report extends Model
         'check_at'
     ];
 
-    public function reportable(){
+    public function user () {
+        return $this->belongsTo(User::class);
+    }
+
+    public function reportable() {
 
         return $this->morphTo();
-        
+    }
+
+    public function post() {
+        return $this->belongsTo(Post::class, 'reported_id');
     }
 }
