@@ -23,16 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (is_null(auth()->user()->approved_at)) {
-            toast('Your account is not yet approved. please contact the administrator.');
-            auth()->logout();
-            return back();
-        }
-        if (! is_null(auth()->user()->blocked_at)) {
-            toast('Your account has been blocked by the admin.');
-            auth()->logout();
-            return back();
-        }
+
         return view('home');
     }
 }

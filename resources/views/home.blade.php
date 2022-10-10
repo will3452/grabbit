@@ -25,16 +25,7 @@
           </div>
         </div>
         <!-- /.col-->
-        <div class="col-sm-6 col-lg-3">
-          <div class="card mb-4 text-white bg-info">
-            <div class="card-body pb-0 d-flex justify-content-between align-items-start">
-              <div>
-                <div class="fs-4 fw-semibold">{{\App\Models\Post::count()}}</div>
-                <div>Total Community post</div>
-              </div>
-            </div>
-          </div>
-        </div>
+
         <!-- /.col-->
         <div class="col-sm-6 col-lg-3">
           <div class="card mb-4 text-white bg-warning">

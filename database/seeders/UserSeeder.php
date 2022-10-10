@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -19,7 +21,8 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
-            \App\Models\User::create(['name' => $user, 'password' => bcrypt('password'), 'email' => "$user@mail.com"]);
+            $user = User::create(['name' => $user, 'password' => bcrypt('password'), 'email' => "$user@mail.com", 'approved_at' => now()]);
+            Profile::create(['user_id' => $user->id, 'address' => 'Tarlac', 'phone' => '0912180883', 'description' => 'nothing', ]);
         }
     }
 }
