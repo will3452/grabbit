@@ -10,17 +10,22 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index (Request $request) {
-
         $data = $request->search;
-
+        $data = null;
+        $postslist = Post::latest()->get();
+        $postarr = [];
+        foreach($postslist as $item){
+            if(!$item->CheckUserBlock()){
+                $postarr[] = $item->id;
+            }
+        }
+        $postarr = $postarr;
         if($data){
-            $posts = Post::where('title', 'like','%'.$data.'%')->latest()->paginate(5);
+            $posts = Post::where('title', 'like','%'.$data.'%')->whereIn('id',$postarr)->latest()->paginate(5);
             return view('posts.index', compact('posts', 'data'));
         }else{
-            $data = null;
-            $posts = Post::latest()->paginate(5);
+            $posts = Post::whereIn('id',$postarr)->latest()->paginate(5);
             return view('posts.index', compact('posts', 'data'));
-
         }
 
     }

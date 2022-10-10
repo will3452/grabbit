@@ -29,7 +29,6 @@
         </form>
     </div>
     @foreach ($posts as $post)
-        @if (!$post->CheckUserBlock())
         <div class="card mt-2 {{'block_post_hide_'.$post->user_id}}">
             <div class="card-header d-flex justify-content-between align-items-baseline">
                 <div class="d-flex align-items-baseline letter_spacing padding_post">
@@ -100,7 +99,6 @@
                 <livewire:comment :post="$post->id" :key="$comment->id"/>
             </div>
         </div>
-        @endif
     @endforeach
     <div class="mt-4">
     {{$posts->links()}}

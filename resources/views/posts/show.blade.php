@@ -21,100 +21,75 @@
 @endsection
 
 @section('content')
-@if (!$post->CheckUserBlock())
 <div class="card mt-2 {{'block_post_hide_'.$post->user_id}}">
     <div class="card-header d-flex justify-content-between align-items-baseline">
-        <div class="d-flex align-items-baseline">
-            @if (!$post->checkUserAuthPost())
-                <div style="margin-right:-10px;">
-                    <a class="header-brand" href="/convo/message/{{$post->getProfilePost()->id}}">
-                        <svg class="icon icon-lg">
-                            <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-comment-square"></use>
-                        </svg>
-                    </a>
-                </div>
-            @endif
-            <div>{{ucfirst($post->getUserPost()->name)}}</div>
-            @if (!$post->checkUserAuthPost())
-            <form class="followform" method="POST">
-                @csrf
-                <input type="hidden" value="{{$post->getProfilePost()->id}}" name="following_id">
-
-                @if ($post->checkUserFollowStatus())
-                    <button class="btn-link outline-none unfollow-user btn-fl {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">
-                        <svg class="icon icon-lg">
-                            <use class="{{'followinc_'.$post->getProfilePost()->id}}" xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-user-unfollow"></use>
-                        </svg>
-                        <span class="hover-unfollow {{'followspn_'.$post->getProfilePost()->id}}">Unfollow User</span>
-                    </button>
-                @else
-                    <button class="btn-link outline-none follow-user btn-fl {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">
-                        <svg class="icon icon-lg">
-                            <use class="{{'followinc_'.$post->getProfilePost()->id}}" xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-user-follow"></use>
-                        </svg>
-                        <span class="hover-follow {{'followspn_'.$post->getProfilePost()->id}}">Follow User</span>
-                    </button>
-                @endif
-            </form>
-            @endif
-            @if (!$post->checkUserAuthPost())
-                {{-- <livewire:block :user_block="$post->user_id" :key="$post->user_id"> --}}
-                <form class="blockform" method="POST">
-                    @csrf
-                    <input type="hidden" value="{{$post->user_id}}" name="blocked_id">
-                    <button class="btn-link outline-none block-user" type="submit">
-                        <svg class="icon icon-lg">
-                            <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-ban"></use>
-                        </svg>
-                        <span class="hover-block">Block User</span>
-                    </button>
+        <div class="d-flex align-items-baseline letter_spacing padding_post">
+            <a style="text-decoration: none; font-weight:600; color:#1f913b; font-size:16px" href="{{route('profile.show', ['user_id' => $post->user_id])}}">{{ucfirst($post->getUserPost()->name)}}</a>
+        </div>
+        @if (!$post->checkUserAuthPost())
+            <div class="post_process_dot">
+                <img id="opendot" class="opendot" style="width:30px; height:30px; cursor:pointer;  object-fit: cover;" src="/dot.png" alt="">
+                <div id="show_dot" class="show_acton_dot toggle">
+                    <form class="followform" method="POST">
+                        @csrf
+                        <input type="hidden" value="{{$post->getProfilePost()->id}}" name="following_id">
+                        @if ($post->checkUserFollowStatus())
+                            <button class="unfollow-user letter_spacing btn-fl {{'followbtn_'.$post->getProfilePost()->id}}"  type="submit">
+                                Unfollow
+                            </button>
+                        @else
+                            <button class="follow-user letter_spacing btn-fl {{'followbtn_'.$post->getProfilePost()->id}}" type="submit">
+                                Follow
+                            </button>
+                        @endif
+                    </form>
+                    <form class="blockform2" method="POST">
+                        @csrf
+                        <input type="hidden" value="{{$post->user_id}}" name="blocked_id">
+                        <button class="block-user letter_spacing" type="submit">Block</button>
                 </form>
-            @endif
-        </div>
-        <div>
-            @if (!$post->checkUserAuthPost())
-                <a href="{{url('meetup/create')}}/{{$post->id}}" class="btn btn-outline-primary">Meetup Request</a>
-            @endif
-        </div>
+                    <div>
+                        <a href="/convo/message/{{$post->getProfilePost()->id}}"><button class="letter_spacing">Message</button></a>
+                    </div>
+                    <div>
+                        <a href="/meetup/create/{{$post->id}}"><button class="letter_spacing">Request Meetup</button></a>
+                    </div>
+                    <div>
+                        <a href="/report/post/{{$post->id}}"><button class="letter_spacing">Report</button></a>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
     <div class="card-header">
         <div class="d-flex justify-content-between">
-            <div>
+            <div class="letter_spacing padding_post">
                 {{$post->title}}
             </div>
-            <div style="font-size:12px;">
+            <div style="font-size:12px;" class="letter_spacing padding_post">
                 {{$post->created_at->diffForHumans()}}
             </div>
         </div>
     </div>
     <div class="card-body">
-        <div>
-            {{$post->descriptions}}
+        <div class="post-image-div padding_post">
+            <a target="_blank" href="{{$post->getPublicImage()}}">
+                <img src="{{$post->getPublicImage()}}" alt="">
+            </a>
         </div>
-        <div>
-            <a target="_blank" href="{{$post->getPublicImage()}}"><img style="max-height:300px !important;" src="{{$post->getPublicImage()}}" alt=""></a>
+        <div class="description_post letter_spacing padding_post">
+            {{ucfirst($post->descriptions)}}
         </div>
         <hr>
         <div class="d-flex justify-content-between">
             <div>
                 <livewire:like :post="$post->id" :key="$post->id">
             </div>
-            @if (!$post->checkUserAuthPost())
-            <div class="report-user">
-                <a href="/report/post/{{$post->id}}" class="reports">
-                    <svg class="icon icon-lg">
-                        <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-flag-alt"></use>
-                    </svg>
-                </a>
-                <span class="hover-report">Report</span>
-            </div>
-            @endif
         </div>
     </div>
     <div class="card-footer">
         <livewire:comment :post="$post->id" :key="$comment->id"/>
     </div>
 </div>
-@endif
 <script src="{{ asset('js/posts.js') }}"></script>
 @endsection

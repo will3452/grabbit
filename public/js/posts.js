@@ -91,6 +91,28 @@ $(document).ready(function(){
             }
         });
     });
+    $(".blockform2").on('submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            url:'/blocks',
+            method:'POST',
+            data:new FormData(this),
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            success:function(data){
+                let url = '/';
+                if(data.messages=='blocked'){
+                    $(".alert-show").show();
+                    $(".alert-messages").text(data.text);
+                    setInterval(function () {  
+                        location = url;
+                    }, 2000);  
+                }
+            }
+        });
+    });
+
     $(document).on('click','.post_process_dot', function(){
         $(this).children('.show_acton_dot').toggleClass('toggle');
     });

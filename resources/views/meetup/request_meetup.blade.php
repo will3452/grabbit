@@ -18,8 +18,7 @@
 <h1>Other Requests</h1>
 <div class="list-group">
     @forelse ($meetupdata as $data)
-        {{-- @if (!$data->CheckUserBlock()) --}}
-            <a href="/meetup/request-meetup/{{$data->id}}/process" class="list-group-item list-group-item-action">
+            <a  @if ($data->approved_at || $data->declined_at)  @else href="/meetup/request-meetup/{{$data->id}}/process" @endif class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{$data->getPost()->title}}
                         @if ($data->approved_at)
@@ -34,7 +33,6 @@
                 </div>
                 <small class="text-muted">{{$data->remarks}}</small>
             </a>
-            {{-- @endif --}}
     @empty
     <a class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">

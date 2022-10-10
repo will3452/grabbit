@@ -34,7 +34,6 @@
             @endphp
            @if ($sort == 'profile')
                 @forelse ($datas as $data)
-                    @if(!$data->CheckUserBlock())
                     <a href="/profile/show/{{$data->id}}" class="list-group-item list-group-item-action mb-3">
                         <div class="d-flex w-100 justify-content-between">
                             <li class="d-flex align-items-baseline">
@@ -51,7 +50,6 @@
                             </li>
                         </div>
                     </a>
-                    @endif
                 @empty
                     <a class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">
@@ -61,7 +59,6 @@
                 @endforelse
             @else
                 @forelse ($datas as $data)
-                    @if(!$data->CheckUserBlock())
                     <a href="/posts/{{$data->id}}" class="list-group-item list-group-item-action mb-3">
                         <div class="d-flex w-100 justify-content-between">
                             <li class="d-flex align-items-baseline">
@@ -81,7 +78,6 @@
                         <small>{{$data->title}}</small> <br>
                         <small class="text-muted">{{$data->descriptions}}</small>
                     </a> 
-                    @endif
                 @empty
                     <a class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-between">

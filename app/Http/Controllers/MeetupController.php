@@ -165,18 +165,22 @@ class MeetupController extends Controller
         $approver_id = auth()->user()->id;
 
         $meetupdata = $meetup->whereApproverId($approver_id)->whereId($request->meetup_id)->first();
-
-        if($meetupdata){
-
-            if($meetupdata->CheckUserBlock()){
-               abort(404);
-            }
-            return view('meetup.process', compact('meetupdata'));
-
-        }else{
-
+        if($meetupdata->approved_at || $meetupdata->declined_at){
             abort(404);
+        }else{
+            if($meetupdata){
+
+                if($meetupdata->CheckUserBlock()){
+                   abort(404);
+                }
+                return view('meetup.process', compact('meetupdata'));
+    
+            }else{
+    
+                abort(404);
+            }
         }
+        
     }
     public function processmeetup(Request $request){
 

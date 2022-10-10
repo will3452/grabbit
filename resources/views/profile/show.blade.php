@@ -77,7 +77,7 @@
                         FOLLOWERS
                     </div>
                     <div class="card-body">
-                        <h2 class="text-center">
+                        <h2 class="text-center follow-count">
                             {{$followersCount}}
                         </h2>
                     </div>

@@ -21,4 +21,18 @@ class Message extends Model
         
         $this->belongsTo(Conversation::class);
     }
+    public function getFiles(){
+        $get = Chatimage::where('message_id', $this->id)->get();
+        return $get;
+    }
+    public function getPublicImage($image) {
+        if (! $image) return '';
+        $arr = explode('/', $image);
+        return "/storage/" . $arr[1];
+        // return $extension = pathinfo($image, PATHINFO_EXTENSION);
+    }
+    public function images()
+    {
+        return $this->hasMany(Chatimage::class);
+    }
 }
