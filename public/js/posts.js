@@ -112,7 +112,25 @@ $(document).ready(function(){
             }
         });
     });
-
+    $(".deleteform").on('submit', function(e){
+        e.preventDefault();
+        $.ajax({
+            url:'/posts/delete',
+            method:'post',
+            data:new FormData(this),
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            success:function(data){
+                if(data.messages=='delete'){
+                    $(".alert-show").show();
+                    $(".alert-messages").text(data.text);
+                    $('.delete_post_hide_'+data.deletepost).addClass('d-none');
+                    console.log(data);
+                }
+            }
+        });
+    });
     $(document).on('click','.post_process_dot', function(){
         $(this).children('.show_acton_dot').toggleClass('toggle');
     });
@@ -120,4 +138,5 @@ $(document).ready(function(){
         $(".show_acton_dot").addClass('toggle');
         $(".alert-dismissible").hide();
     });
+    
   });

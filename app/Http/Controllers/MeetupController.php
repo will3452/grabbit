@@ -18,7 +18,7 @@ class MeetupController extends Controller
 
         if($id_post){
 
-            $posts = Post::whereId($id_post)->first();
+            $posts = Post::whereId($id_post)->where('status', null)->first();
 
             if($posts){
 
@@ -173,7 +173,12 @@ class MeetupController extends Controller
                 if($meetupdata->CheckUserBlock()){
                    abort(404);
                 }
-                return view('meetup.process', compact('meetupdata'));
+                $posts = Post::whereId($meetupdata->post_id)->where('status', null)->first();
+                if($posts){
+                    return view('meetup.process', compact('meetupdata'));
+                }else{
+                    abort(404);
+                }
     
             }else{
     

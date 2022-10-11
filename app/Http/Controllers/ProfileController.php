@@ -20,11 +20,18 @@ class ProfileController extends Controller
     public function show(Request $request){
         $user = User::where('id', $request->user_id)->first();
         $profile = $user->profile()->first();
-        $posts = Post::whereUserId($profile->user_id)->latest()->simplePaginate(4);
         $followersCount = Follow::whereFollowingId($request->user_id)->count();
-        $postsCount = Post::whereUserId($profile->user_id)->count();
         $reviews = Review::whereUserId($request->user_id)->latest()->simplePaginate(3);
         $averageStar = Review::whereUserId($request->user_id)->average('star');
+
+        if(auth()->user()->id == $request->user_id){
+            $posts = Post::whereUserId($profile->user_id)->latest()->simplePaginate(6);
+            $postsCount = Post::whereUserId($profile->user_id)->count();
+        }else{
+            $posts = Post::whereUserId($profile->user_id)->where('status', null)->latest()->simplePaginate(6);
+            $postsCount = Post::whereUserId($profile->user_id)->where('status', null)->count();
+        }
+       
         if($user->CheckUserBlock()){
             return redirect()->route('home');
         }
@@ -59,7 +66,7 @@ class ProfileController extends Controller
             'description' => $data['descriptions'],
             'avatar' => $imagepath,
         ]);
-        return back()->withSuccess('Update Success!');
+        return redirect('/profile/show/'.auth()->user()->id)->withSuccess('Update Success!');
     }
 
 }

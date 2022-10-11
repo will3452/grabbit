@@ -59,6 +59,20 @@
                     </div>
                 </div>
             </div>
+        @else
+            <div class="post_process_dot">
+                <img id="opendot" class="opendot" style="width:30px; height:30px; cursor:pointer;  object-fit: cover;" src="/dot.png" alt="">
+                <div id="show_dot" class="show_acton_dot toggle">
+                    <div>
+                        <a href="/posts/edit/{{$post->id}}"><button class="letter_spacing">Edit</button></a>
+                    </div>
+                    <form class="deleteform" method="POST">
+                        @csrf
+                        <input type="hidden" value="{{$post->id}}" name="post_id">
+                        <button class="block-user letter_spacing" type="submit">Delete</button>
+                </form>
+                </div>
+            </div>
         @endif
     </div>
     <div class="card-header">
@@ -73,10 +87,21 @@
     </div>
     <div class="card-body">
         <div class="post-image-div padding_post">
-            <a target="_blank" href="{{$post->getPublicImage()}}">
-                <img src="{{$post->getPublicImage()}}" alt="">
-            </a>
+            <div>
+                <img src="{{ $post->getExploadImage( $post->getPostImage()[0]->image); }}" alt="">
+            </div>
         </div>
+        @if ($post->getPostImage()->count() > 1)
+            <div class="post-image-footer padding_post">
+                @foreach ($post->getPostImage() as $index => $itemimg)
+                    @if ($index > 0)
+                        <div>
+                            <img src="{{ $post->getExploadImage($itemimg->image); }}" alt="">
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        @endif
         <div class="description_post letter_spacing padding_post">
             {{ucfirst($post->descriptions)}}
         </div>

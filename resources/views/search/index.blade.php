@@ -57,6 +57,9 @@
                         </div>
                     </a>
                 @endforelse
+                <div class="mt-4">
+                    {{$datas->links()}}
+                </div>
             @else
                 @forelse ($datas as $data)
                     <a href="/posts/{{$data->id}}" class="list-group-item list-group-item-action mb-3">
@@ -85,6 +88,9 @@
                         </div>
                     </a>
                  @endforelse
+                 <div class="mt-4">
+                    {{$datas->links()}}
+                </div>
             @endif
         </div>
 @endsection

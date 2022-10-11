@@ -78,6 +78,23 @@ class Post extends Model
         }
         return false;
     }
+    // public function getAllMyFollow(){
+    //     $follow = Follow::where('follower_id', auth()->user()->id)->get();
+    //     return $follow;
+    // }
+    // public function getProfileData(){
+    //     foreach($this->getAllMyFollow() as $items){
+    //         $followarr[] = $items->following_id;
+    //     }
+    //     $profile = Profile::wherein('id', $followarr)->get();
+    //     return $profile;
+    // }
+    // public function getUserData(){
+    //     foreach($this->getProfileData() as $item2){
+    //         $userid[] = $item2->user_id;
+    //     }
+    //     return $userid;
+    // }
     public function getCommentsCount () {
         return Comment::whereModelType('\\App\\Models\\Post')->whereModelId($this->id)->count();
     }
@@ -89,9 +106,20 @@ class Post extends Model
         $arr = explode('/', $this->attachments);
         return "/storage/" . $arr[1];
     }
+    public function getExploadImage($image){
+        $arr = explode('/', $image);
+        return "/storage/" . $arr[1];
+    }
+    public function getPostImage(){
+        $postimage = Postimage::where('post_id', $this->id)->get();
+        return $postimage;
+    }
     public function reports(){
 
         return $this->morphToMany(Report::class, 'reported');
 
+    }
+    public function postimages(){
+        return $this->hasMany(Postimage::class);
     }
 }

@@ -54,6 +54,8 @@ Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () 
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::get('/create', [PostController::class, 'create'])->name('create');
     Route::get('/{post}', [PostController::class, 'show'])->name('show');
+    Route::get('/edit/{post_id}', [PostController::class, 'edit'])->name('edit');
+    Route::post('/delete', [PostController::class, 'destroy'])->name('destroy');
 });
 
 //like

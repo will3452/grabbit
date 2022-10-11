@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $imagepath = request('avatar')->store('images');
+        $imagepath = request('avatar')->store('images', 'public');
         Profile::create([
             'user_id' => $user->id,
             'address' => $data['address'],
