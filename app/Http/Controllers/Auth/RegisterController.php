@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Models\Profile;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -43,25 +44,6 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'avatar' => ['required', 'mimes:jpg,png,jpeg', 'max:5000'],
-            'address' => ['required', 'string'],
-            'phone' => ['required', 'numeric'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -83,5 +65,25 @@ class RegisterController extends Controller
             'avatar' => $imagepath,
         ]);
         return $user;
+    }
+
+    public function register (Request $request) {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'avatar' => ['required', 'mimes:jpg,png,jpeg', 'max:5000'],
+            'address' => ['required', 'string'],
+            'phone' => ['required', 'numeric'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = $this->create($request->all());
+
+        if ($user->approved_at == null) {
+            toast('Registered successfully, please wait for administrator approval.', 'success');
+        }
+
+        return redirect()->to(route('login'));
     }
 }

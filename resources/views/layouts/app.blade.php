@@ -153,7 +153,7 @@
                                 <svg class="icon me-2">
                                     <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-account-logout"></use>
                                 </svg> Logout</a>
-3q                        </div>
+                        </div>
                     </li>
 
                 </ul>
