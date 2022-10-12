@@ -45,40 +45,16 @@ class ProfileController extends Controller
                 'avatar' => ['mimes:jpg,png,jpeg', 'max:5000'],
                 'name' => 'required',
                 'address' => 'required',
+                'document' =>  ['mimes:pdf,docx'],
                 'phone' => ['required', 'numeric'],
                 'descriptions' => ['required', 'max:500'],    //validation of profile
             ]
         );
-        $validateimage = Validator::make($request->all(),
-            [
-                'attachments.*' => ['mimes:jpg,jpeg,png', 'max:5000'], // 5mb
-            ],
-            [
-                'attachments.*.mimes' => 'Only jpg, jpeg, png images are allowed',
-            ]
-        );
-        if($data->fails() && $validateimage->fails()){
+        if($data->fails()){
             return  response()->json(
                 [
-                    'status'=>'400-both',
+                    'status'=> 400,
                     'messages'=>$data->getMessageBag(),
-                    'messageimage' => 'Only jpg, jpeg, png images are allowed'
-                ]
-            );
-        }
-        elseif($data->fails()){
-            return  response()->json(
-                [
-                    'status'=>'404-datas',
-                    'messages'=>$data->getMessageBag(),
-                ]
-            );
-        }
-        elseif($validateimage->fails()){
-            return  response()->json(
-                [
-                    'status'=>'404-images',
-                    'messageimage'=>'Only jpg, jpeg, png images are allowed',
                 ]
             );
         }
@@ -88,6 +64,12 @@ class ProfileController extends Controller
             }else{
                 $imagepath = auth()->user()->profile->avatar;
             }
+            if(request('document')){
+                $docspath = request('document')->store('public'); //store documets to public storage
+            }else{
+                $docspath = auth()->user()->profile->document;
+            }
+            
             auth()->user()->update([
                 'name' => request('name')                  //uodate user data
             ]);
@@ -95,17 +77,9 @@ class ProfileController extends Controller
                 'address' => request('address'),
                 'phone' =>  request('phone'),
                 'description' => request('descriptions'),
+                'document' => $docspath,
                 'avatar' => $imagepath,
             ]);
-           if(request('attachments')){
-                foreach(request('attachments') as $attach){
-                    $imageatt = $attach->store('images', 'public'); //store avatar to public storage
-                    Profiledocs::create([
-                        'profile_id' => auth()->user()->profile->id,
-                        'image' => $imageatt,
-                    ]);
-                }
-           }
            return  response()->json(
                 [
                     'status'=>200,

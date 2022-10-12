@@ -50,6 +50,9 @@
                             {{$profile->description}}
                         </small>
                     </div>
+                    <div  class="text-center" >
+                           <a target="_blank"  href="{{ $profile->getExploadDocx() }}" class="btn btn-primary">Document</a>
+                    </div>
                 </div>
                 @if (auth()->user()->id == $user->id)
                     <div class="d-flex justify-content-center mt-2 mb-2">

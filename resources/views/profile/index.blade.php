@@ -68,12 +68,12 @@
                 </span>
            </div>
            <div class="mb-2 mt-2">
-                <label for="attachments">Certificates /Logo / Pictures </label>
+                <label for="document">Update Document </label>
                 <div class="form-group">
-                    <input  name="attachments[]" id="attachments" type="file" class="form-control"  @error('attachments.*') is-invalid @enderror" multiple placeholder="Attachment">
+                    <input  name="document" id="document" type="file" class="form-control" multiple placeholder="Document">
                 </div>
                 <span class="text-danger">
-                    <strong class="attachments"></strong>
+                    <strong class="document"></strong>
                 </span>
            </div>
            <div class="mb-2 mt-2">

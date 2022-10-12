@@ -14,13 +14,14 @@ class Profile extends Model
         'address',
         'phone',
         'avatar',
+        'document',
         'description',
     ];
-
+    public function getExploadDocx(){
+        $arr = explode('/', $this->document);
+        return "/storage/" . $arr[1];
+    }
     public function user(){
         return $this->belongsTo(User::class);
-    }
-    public function profiledocs(){
-        return $this->hasMany(Profiledocs::class);
     }
 }
