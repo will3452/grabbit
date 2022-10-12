@@ -67,7 +67,7 @@ Route::name('like.')->middleware(['auth'])->prefix('/like')->group(function () {
 Route::name('profile.')->middleware(['auth'])->prefix('/profile')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('index');
     Route::get('/show/{user_id}', [ProfileController::class, 'show'])->name('show');
-    Route::patch('/{user_id}', [ProfileController::class, 'update'])->name('update');
+    Route::post('/', [ProfileController::class, 'update'])->name('update');
 });
 //notification
 Route::name('notification.')->middleware(['auth'])->prefix('/notification')->group(function () {

@@ -35,7 +35,8 @@
                                 @endif
                             </div>
                             <div class="ms-2 me-auto">
-                            <div>{{ucwords($item->geUserConvo()->name)}}</div>
+                                <div>{{ucwords($item->geUserConvo()->name)}}</div>
+                                <div id="convolatestmssage"><small>{{$item->getLatestMessage()->messages}}</small></div>
                             </div>
                         </li>
                     </a>

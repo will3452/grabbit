@@ -88,7 +88,7 @@
     <div class="card-body">
         <div class="post-image-div padding_post">
             <div>
-                <img src="{{ $post->getExploadImage( $post->getPostImage()[0]->image); }}" alt="">
+                <a target="_blank" href="{{ $post->getExploadImage( $post->getPostImage()[0]->image); }}"><img src="{{ $post->getExploadImage( $post->getPostImage()[0]->image); }}" alt=""></a>
             </div>
         </div>
         @if ($post->getPostImage()->count() > 1)
@@ -96,7 +96,7 @@
                 @foreach ($post->getPostImage() as $index => $itemimg)
                     @if ($index > 0)
                         <div>
-                            <img src="{{ $post->getExploadImage($itemimg->image); }}" alt="">
+                            <a target="_blank" href="{{ $post->getExploadImage($itemimg->image); }}"><img src="{{ $post->getExploadImage($itemimg->image); }}" alt=""></a>
                         </div>
                     @endif
                 @endforeach

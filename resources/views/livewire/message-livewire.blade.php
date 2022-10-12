@@ -66,7 +66,7 @@
                 </div>
            </div>
            <div class="mb-3">
-                <input type="file" wire:model="files" accept="image/png, image/gif, image/jpeg image/jpg" multiple class="form-control p-2">
+                <input type="file" wire:model="files" accept="image/png, image/PNG, image/jpeg, image/JPEG, image/jpg, image/JPG" multiple class="form-control p-2">
                 {{-- @error('files') <span class="error">{{ $message }}</span> @enderror --}}
             </div>
             <div wire:loading wire:target="files">

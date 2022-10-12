@@ -54,6 +54,10 @@ class Conversation extends Model
         }
         return true;
     }
+    public function getLatestMessage(){
+        $latest = Message::where('conversation_id', $this->id)->latest()->first();
+        return $latest;
+    }
     public function messages(){
 
         $this->hasMany(Message::class);

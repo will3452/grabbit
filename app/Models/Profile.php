@@ -13,14 +13,14 @@ class Profile extends Model
         'user_id',
         'address',
         'phone',
-        'attachments',
         'avatar',
         'description',
     ];
 
     public function user(){
-
         return $this->belongsTo(User::class);
-        
+    }
+    public function profiledocs(){
+        return $this->hasMany(Profiledocs::class);
     }
 }

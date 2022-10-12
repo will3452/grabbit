@@ -62,7 +62,7 @@ class MessageLivewire extends Component
     public function sendmessage(){
         $data = $this->validate(
             [
-                'message_sent' => 'required',
+                'message_sent' => 'required|max:200',
             ]
         );
         if($this->isConvoExist()){
@@ -73,6 +73,7 @@ class MessageLivewire extends Component
                 'read_by' => $this->read_by,
                 'created_by' => auth()->user()->id,
             ]);
+            Conversation::where('id', $this->isConvoExist()->id)->update(['updated_at' => NOW()]);
             foreach ($this->files as $file) {
                 $filepath = $file->store('public');
                 Chatimage::create([

@@ -14480,7 +14480,7 @@ html:not([dir=rtl]) .wrapper {
   margin: 15px 0;
   height: auto;
   text-align: center;
-}.post-image-div div img{
+}.post-image-div div a img{
     width: 100%;
     height: 500px;
     object-fit: cover;
@@ -14503,7 +14503,7 @@ html:not([dir=rtl]) .wrapper {
   border-radius:10rem;
   border:1px solid #20c997;
   }
-.post-image-footer div img{
+.post-image-footer div a img{
   width: 250px;
     height: 150px;
     object-fit: cover;
@@ -14570,4 +14570,33 @@ html:not([dir=rtl]) .wrapper {
 .disabledbtn{
   opacity: 0.6;
   cursor: 'not-allowed';
+}
+#convolatestmssage {
+  width: 30em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#convolatestmssage small{
+  font-size: 13px;
+}
+@media  screen and (max-width:1000px){
+  #convolatestmssage {
+    width: 25em;
+  }
+}
+@media  screen and (max-width:850px){
+  #convolatestmssage {
+    width: 20em;
+  }
+}
+@media  screen and (max-width:600px){
+  #convolatestmssage {
+    width: 15em;
+  }
+}
+@media  screen and (max-width:500px){
+  #convolatestmssage {
+    display: none;
+  }
 }

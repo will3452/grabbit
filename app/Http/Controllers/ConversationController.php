@@ -21,7 +21,7 @@ class ConversationController extends Controller
 
         $id_auth = auth()->user()->id;
 
-        $convo = Conversation::where('name', 'like', '%' . $id_auth . '%')->get();
+        $convo = Conversation::where('name', 'like', '%' . $id_auth . '%')->orderBy('updated_at', 'DESC')->get();
 
         return view('message.convo', compact('convo'));
     }
