@@ -126,5 +126,4 @@ Route::get('register-success', function () {
 //availability
 Route::name('date.')->middleware(['auth'])->prefix('/date')->group(function () {
     Route::get('/create', [AvailabilityController::class, 'create'])->name('create');
-    Route::post('/', [AvailabilityController::class, 'store'])->name('store');
 });
