@@ -94,4 +94,7 @@ class User extends Authenticatable
         return $this->morphToMany(Report::class, 'reportable');
 
     }
+    public function availabilities(){
+        return $this->hasMany(Availability::class);
+    }
 }

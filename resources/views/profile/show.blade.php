@@ -50,9 +50,11 @@
                             {{$profile->description}}
                         </small>
                     </div>
-                    <div  class="text-center" >
-                           <a target="_blank"  href="{{ $profile->getExploadDocx() }}" class="btn btn-primary">Document</a>
-                    </div>
+                    @if ($profile->document)
+                        <div  class="text-center" >
+                            <a target="_blank"  href="{{ $profile->getExploadDocx() }}" class="btn btn-primary">Document</a>
+                        </div>
+                    @endif
                 </div>
                 @if (auth()->user()->id == $user->id)
                     <div class="d-flex justify-content-center mt-2 mb-2">
@@ -153,6 +155,34 @@
                 <div class="mt-4 d-flex justify-content-end">
                     {{$reviews->links()}}
                 </div>
+            </div>
+        </div>
+        <div class="card mt-4">
+            @if (auth()->user()->id == $user->id)
+            <div class="card-header d-flex justify-content-between align-items-baseline">
+                <p>Availability</p>
+                <a href="{{route('date.create')}}" class="btn btn-primary"> Add Availability</a>
+            </div>
+            @else
+            <div class="card-header">
+                Availability
+            </div>
+            @endif
+            <div class="card-body">
+                <ul class="list-group">
+                    August 10, 2022 (10:00 am - 1:00 pm)
+                </ul>
+                <hr>
+                <ul class="list-group">
+                    August 10, 2022 (10:00 am - 1:00 pm)
+                </ul>
+                <hr>
+                <ul class="list-group">
+                    August 10, 2022 (10:00 am - 1:00 pm)
+                </ul>
+                {{-- <div class="mt-4 d-flex justify-content-end">
+                    {{$reviews->links()}}
+                </div> --}}
             </div>
         </div>
     </div>

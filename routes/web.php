@@ -9,12 +9,13 @@ use App\Http\Controllers\BlockController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\MeetupController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,4 +122,9 @@ Route::prefix('review')->name('review.')->group(function () {
 Route::get('register-success', function () {
     toast('Registered succesfully!');
     return view('register_success');
+});
+//availability
+Route::name('date.')->middleware(['auth'])->prefix('/date')->group(function () {
+    Route::get('/create', [AvailabilityController::class, 'create'])->name('create');
+    Route::post('/', [AvailabilityController::class, 'store'])->name('store');
 });

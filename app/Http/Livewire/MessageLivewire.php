@@ -10,6 +10,8 @@ use App\Models\Conversation;
 use GuzzleHttp\Psr7\Request;
 use Livewire\WithFileUploads;
 
+use function Symfony\Component\VarDumper\Dumper\esc;
+
 class MessageLivewire extends Component
 {
     use WithFileUploads;
@@ -21,14 +23,19 @@ class MessageLivewire extends Component
     public $AllMessages;
     public $files = [];
     public function mount(){
-        $this->user = User::find($this->read_by);
-        if($this->user->CheckUserBlock()){
+        $this->user = User::where('id', $this->read_by)->where('is_admin', 0)->first();
+        if(!$this->user){
             abort(404);
         }
-        $this->profile_reader = $this->user->profile()->first();
-        if($this->isConvoExist()){
-            $this->conversation_id = $this->isConvoExist()->id;
-            $this->AllMessages = Message::where('conversation_id', $this->conversation_id)->get();
+        else{
+            if($this->user->CheckUserBlock()){
+                abort(404);
+            }
+            $this->profile_reader = $this->user->profile()->first();
+            if($this->isConvoExist()){
+                $this->conversation_id = $this->isConvoExist()->id;
+                $this->AllMessages = Message::where('conversation_id', $this->conversation_id)->get();
+            }
         }
     }
     public function redTo(){
@@ -53,12 +60,6 @@ class MessageLivewire extends Component
         }
 
     }
-    // public function updated($field){
-    //     $this->validateOnly($field,[
-    //         'files.*' => 'required|mimes:jpeg,png,pdf'
-    //     ]);
-    // }
-
     public function sendmessage(){
         $data = $this->validate(
             [
