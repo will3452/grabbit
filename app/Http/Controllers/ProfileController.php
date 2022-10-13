@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Follow;
@@ -9,6 +8,7 @@ use App\Models\Review;
 use App\Models\Profile;
 use App\Models\Profiledocs;
 use Illuminate\Http\Request;
+use App\Models\Availability;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
@@ -33,11 +33,11 @@ class ProfileController extends Controller
             $posts = Post::whereUserId($profile->user_id)->where('status', null)->latest()->simplePaginate(6);
             $postsCount = Post::whereUserId($profile->user_id)->where('status', null)->count();
         }
-       
+        $availabledate = Availability::orderBy('created_at', 'desc')->paginate(2);
         if($user->CheckUserBlock()){
             return redirect()->route('home');
         }
-        return view('profile.show', compact('user', 'profile', 'posts', 'followersCount', 'postsCount', 'reviews', 'averageStar'));
+        return view('profile.show', compact('user', 'profile', 'posts', 'followersCount', 'postsCount', 'reviews', 'averageStar', 'availabledate'));
     }
     public function update(Request $request){
         $data = Validator::make($request->all(),

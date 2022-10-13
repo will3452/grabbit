@@ -169,20 +169,15 @@
             </div>
             @endif
             <div class="card-body">
-                <ul class="list-group">
-                    August 10, 2022 (10:00 am - 1:00 pm)
-                </ul>
-                <hr>
-                <ul class="list-group">
-                    August 10, 2022 (10:00 am - 1:00 pm)
-                </ul>
-                <hr>
-                <ul class="list-group">
-                    August 10, 2022 (10:00 am - 1:00 pm)
-                </ul>
-                {{-- <div class="mt-4 d-flex justify-content-end">
-                    {{$reviews->links()}}
-                </div> --}}
+                @foreach ($availabledate as $date)
+                    <ul class="list-group">
+                        {{date('M d, Y', strtotime($date->date))}} ({{date('h:i: A', strtotime($date->start_time))}} - {{date('h:i: A', strtotime($date->end_time))}})
+                    </ul>
+                    <hr>
+                @endforeach
+                <div class="mt-4 d-flex justify-content-end">
+                    {{$availabledate->links()}}
+                </div>
             </div>
         </div>
     </div>

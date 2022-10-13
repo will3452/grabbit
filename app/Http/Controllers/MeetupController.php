@@ -13,12 +13,10 @@ class MeetupController extends Controller
     //
 
     public function create(Request $request){
+        $postid = $request->id_post;
+        if($postid){
 
-        $id_post = $request->id_post;
-
-        if($id_post){
-
-            $posts = Post::whereId($id_post)->where('status', null)->first();
+            $posts = Post::whereId($postid)->where('status', null)->first();
 
             if($posts){
 
@@ -28,7 +26,7 @@ class MeetupController extends Controller
                     if($posts->CheckUserBlock()){
                           return redirect()->route('home');
                     }
-                    return view('meetup.create', compact('posts'));
+                    return view('meetup.create', compact('postid'));
 
                 }else{
                     
