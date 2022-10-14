@@ -17,11 +17,12 @@ class CreateMeetupsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('requestor_id');
             $table->unsignedBigInteger('approver_id');
-            $table->string('remarks');
+            $table->longText('remarks');
             $table->unsignedBigInteger('post_id');
             $table->dateTime('approved_at')->nullable();
             $table->dateTime('declined_at')->nullable();;
-            $table->dateTime('meetup_date');
+            $table->string('tset');
+            $table->date('meetup_date')->nullable();
             $table->timestamps();
         });
     }

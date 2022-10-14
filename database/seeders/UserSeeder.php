@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
         $users = [
             'william',
             'leo',
+            'jun',
         ];
 
         foreach ($users as $user) {

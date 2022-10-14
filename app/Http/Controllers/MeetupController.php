@@ -45,81 +45,81 @@ class MeetupController extends Controller
         }
 
     }
-    public function store(Request $request){
+    // public function store(Request $request){
 
-        $meetup = new Meetup;
+    //     $meetup = new Meetup;
 
-        $data = Validator::make($request->all(),
-            [
-                'meetup_date' => 'required|date',
-                'post_id' => 'required',
-                'remarks' => 'required'
-            ]
-        );
+    //     $data = Validator::make($request->all(),
+    //         [
+    //             'meetup_date' => 'required|date',
+    //             'post_id' => 'required',
+    //             'remarks' => 'required'
+    //         ]
+    //     );
 
-        if($data->fails()){
+    //     if($data->fails()){
 
-            return response()->json(
-                [
-                     'status'=>400,
-                     'messages'=>$data->getMessageBag(),
-                ]
-            );
+    //         return response()->json(
+    //             [
+    //                  'status'=>400,
+    //                  'messages'=>$data->getMessageBag(),
+    //             ]
+    //         );
 
-        }else{
+    //     }else{
 
-            $posts = Post::whereId($request->input('post_id'))->first();
+    //         $posts = Post::whereId($request->input('post_id'))->first();
 
-            $request['requestor_id'] = auth()->user()->id;
-            $request['approver_id'] = $posts->user_id;
+    //         $request['requestor_id'] = auth()->user()->id;
+    //         $request['approver_id'] = $posts->user_id;
 
-            if($posts){
+    //         if($posts){
 
-                //check if user have already meetup
+    //             //check if user have already meetup
 
-                $check = $meetup->whereRequestorId($request['requestor_id'])->whereApproverId($request['approver_id'])->wherePostId($request->input('post_id'))->first();
-
-
-
-               if($check){
-                    return response()->json(
-                        [
-                            'status'=>404,
-                            'messages'=>'You Already Set Meeting Up On this Post'
-                        ]
-                    );
-               }else{
+    //             $check = $meetup->whereRequestorId($request['requestor_id'])->whereApproverId($request['approver_id'])->wherePostId($request->input('post_id'))->first();
 
 
-                     $meetup->create($request->all());
 
-                     Notification::create([
-                        'user_id' => $request['approver_id'],
-                        'remarks' => auth()->user()->name. ' sent a meetup request to you.',
-                        'redirect_link' => route('meetup.showrequestmeetuplist'),
-                    ]);
-
-                     return response()->json(
-                        [
-                            'status'=>204,
-                            'messages'=>'success'
-                        ]
-                    );
-
-               }
+    //            if($check){
+    //                 return response()->json(
+    //                     [
+    //                         'status'=>404,
+    //                         'messages'=>'You Already Set Meeting Up On this Post'
+    //                     ]
+    //                 );
+    //            }else{
 
 
-            }else{
-                return response()->json(
-                    [
-                         'status'=>404,
-                         'messages'=>'Post Not Found'
-                    ]
-                );
-            }
+    //                  $meetup->create($request->all());
 
-        }
-    }
+    //                  Notification::create([
+    //                     'user_id' => $request['approver_id'],
+    //                     'remarks' => auth()->user()->name. ' sent a meetup request to you.',
+    //                     'redirect_link' => route('meetup.showrequestmeetuplist'),
+    //                 ]);
+
+    //                  return response()->json(
+    //                     [
+    //                         'status'=>204,
+    //                         'messages'=>'success'
+    //                     ]
+    //                 );
+
+    //            }
+
+
+    //         }else{
+    //             return response()->json(
+    //                 [
+    //                      'status'=>404,
+    //                      'messages'=>'Post Not Found'
+    //                 ]
+    //             );
+    //         }
+
+    //     }
+    // }
     public function showrequestmeetuplist(Request $request){
         $meetup = new Meetup;
         $approver_id = auth()->user()->id;

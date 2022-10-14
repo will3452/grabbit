@@ -12,7 +12,7 @@
         </div>
         <div class="form-group mt-3">
             <label for="starttime">Start Time</label>
-            <input wire:model="starttime" min="09:00" max="18:00" type="time" class="form-control  @error('starttime') is-invalid @enderror"id="starttime" name="starttime" placeholder="starttime">
+            <input wire:model="starttime" type="time" class="form-control  @error('starttime') is-invalid @enderror"id="starttime" name="starttime" placeholder="starttime">
             <div class="text-danger mt-1">
                 @error('starttime')
                     {{$message}}

@@ -46,7 +46,10 @@
             </div>
             <input type="hidden" id="meetup_id" name="meetup_id" value="{{$meetupdata->id}}">
             <div class="form-group">
-                <input class="form-control" type="text" readonly value="{{$meetupdata->meetup_date}}">
+                <input class="form-control" type="text" readonly value="{{date('M d, Y', strtotime($meetupdata->meetup_date))}}">
+            </div>
+            <div class="form-group mt-2">
+                <input class="form-control" type="text" readonly value="{{date('h:i: A', strtotime($meetupdata->tset)) }}">
             </div>
             <div class="form-group mt-2">
                 <textarea placeholder="Remarks" class="form-control" readonly rows="3">{{$meetupdata->remarks}}</textarea>

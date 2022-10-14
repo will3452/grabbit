@@ -16,7 +16,8 @@ class Meetup extends Model
         'post_id',
         'approved_at',
         'declined_at',
-        'meetup_date'
+        'tset',
+        'meetup_date',
     ];
 
     public function post(){

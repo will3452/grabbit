@@ -14,7 +14,7 @@
             <label for="meetup_date">Select Date To Load Available Time</label>
             <input wire:model="meetup_date" name="meetup_date" type="text" id="meetup_date" class="form-control" onchange="this.dispatchEvent(new InputEvent('input'))" placeholder="Y-m-d">
             <div wire:loading wire:target="meetup_date">
-                Checking...
+                Verifying...
             </div>
             <div class="text-danger mt-1">
                 @error('meetup_date')
@@ -28,9 +28,12 @@
          @if ($meetup_date)
             <div class="form-group">
                 <label for="time">Available Time</label>
-                {{-- <select wire:model="time" class="form-control" name="time" id="time"> //stop here
-                        {{$getData->start_time - $getData->end_time}}
-                </select> --}}
+                <select wire:model="time" class="form-control" name="time" id="time"> 
+                    <option>{{$titleoftime}}</option>
+                    @for ($i=strtotime($getData->start_time); $i<strtotime($getData->end_time); $i+=3600)
+                        <option value="{{date("H:i", $i)}}" wire:key="{{ $i }}">{{date("h:i A", $i)}}</option>
+                    @endfor
+                </select>
                 <div class="text-danger mt-1">
                     @error('time')
                         {{$message}}
@@ -40,23 +43,36 @@
         @endif
         <div class="form-group mt-2">
             <label for="remarks">Create Your Remarks</label>
-            <textarea  name="remarks" id="remarks" placeholder="Remarks" class="form-control" id="remarks" rows="3"></textarea>
+            <textarea wire:model="remarks" name="remarks" id="remarks" placeholder="Remarks" class="form-control" id="remarks" rows="3"></textarea>
             <div class="text-danger mt-1">
                 @error('remarks')
                     {{$message}}
                 @enderror
             </div>
         </div>
-        <div class="mt-2 form-group" style="text-align:right !important;">
-            <button wire:target="stored" disabled type="submit" class="btn btn-primary metupssbtn">
-                <div wire:loading.remove wire:target="stored">
-                    Create Meetup
-                </div>
-                <div wire:loading wire:target="stored">
-                    Processing...
-                </div>
-            </button>
-        </div>
+        @if (strlen($remarks) >= 1 && strlen($meetup_date) >= 1 && strlen($time) >= 1)
+            <div class="mt-2 form-group" style="text-align:right !important;">
+                <button wire:target="stored" type="submit" class="btn btn-primary metupssbtn">
+                    <div wire:loading.remove wire:target="stored">
+                        Create Meetup
+                    </div>
+                    <div wire:loading wire:target="stored">
+                        Processing...
+                    </div>
+                </button>
+            </div>
+        @else
+            <div class="mt-2 form-group" style="text-align:right !important;">
+                <button wire:target="stored" disabled type="submit" class="btn btn-primary metupssbtn">
+                    <div wire:loading.remove wire:target="stored">
+                        Create Meetup
+                    </div>
+                    <div wire:loading wire:target="stored">
+                        Processing...
+                    </div>
+                </button>
+            </div>
+        @endif
     </form>
     <script type="text/javascript">
         let enabledays = <?php echo $dataarray; ?>;
