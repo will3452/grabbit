@@ -10,6 +10,7 @@ use App\Models\Profiledocs;
 use Illuminate\Http\Request;
 use App\Models\Availability;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -23,7 +24,7 @@ class ProfileController extends Controller
         $user = User::where('id', $request->user_id)->first();
         $profile = $user->profile()->first();
         $followersCount = Follow::whereFollowingId($request->user_id)->count();
-        $reviews = Review::whereUserId($request->user_id)->latest()->simplePaginate(3);
+        $reviews = Review::whereUserId($request->user_id)->latest()->get();
         $averageStar = Review::whereUserId($request->user_id)->average('star');
 
         if(auth()->user()->id == $request->user_id){
@@ -33,7 +34,7 @@ class ProfileController extends Controller
             $posts = Post::whereUserId($profile->user_id)->where('status', null)->latest()->simplePaginate(6);
             $postsCount = Post::whereUserId($profile->user_id)->where('status', null)->count();
         }
-        $availabledate = Availability::orderBy('created_at', 'desc')->paginate(2);
+        $availabledate = Availability::where('date', '>' ,Carbon::now()->format('Y-m-d'))->orderBy('created_at', 'desc')->get();
         if($user->CheckUserBlock()){
             return redirect()->route('home');
         }

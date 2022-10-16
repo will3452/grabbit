@@ -152,9 +152,6 @@
                         <x-review-item :review="$review"></x-review-item>
                     @endforeach
                 </ul>
-                <div class="mt-4 d-flex justify-content-end">
-                    {{$reviews->links()}}
-                </div>
             </div>
         </div>
         <div class="card mt-4">
@@ -175,9 +172,6 @@
                     </ul>
                     <hr>
                 @endforeach
-                <div class="mt-4 d-flex justify-content-end">
-                    {{$availabledate->links()}}
-                </div>
             </div>
         </div>
     </div>

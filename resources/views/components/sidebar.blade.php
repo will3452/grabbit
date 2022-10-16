@@ -7,7 +7,13 @@
           <svg class="nav-icon">
             <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
           </svg> Dashboard</a></li>
-
+          <li>
+            <a class="nav-link" href="/wishlist">
+                <svg class="nav-icon">
+                  <use xlink:href="/vendors/@coreui/icons/svg/free.svg#cil-calculator"></use>
+                </svg> My Wishlist
+            </a>
+         </li>
      <li>
         <a class="nav-link" href="/posts">
             <svg class="nav-icon">

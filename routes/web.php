@@ -16,6 +16,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,4 +127,9 @@ Route::get('register-success', function () {
 //availability
 Route::name('date.')->middleware(['auth'])->prefix('/date')->group(function () {
     Route::get('/create', [AvailabilityController::class, 'create'])->name('create');
+});
+//wishlist
+Route::name('wishlist.')->middleware(['auth'])->prefix('/wishlist')->group(function () {
+    Route::get('/', [WishlistController::class, 'index'])->name('index');
+    Route::post('/', [WishlistController::class, 'store'])->name('store');
 });

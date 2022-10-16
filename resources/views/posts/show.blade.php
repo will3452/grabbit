@@ -43,11 +43,22 @@
                             </button>
                         @endif
                     </form>
+                    <form class="wishlist" method="POST">
+                        @csrf
+                        <input type="hidden" value="{{$post->id}}" name="post_id">
+                        <button class="wishlist-user letter_spacing" type="submit">
+                            @if ($post->checkWishlist())
+                                Remove To Wishlist
+                            @else
+                                Add To Wishlist
+                            @endif
+                        </button>
+                   </form>
                     <form class="blockform2" method="POST">
                         @csrf
                         <input type="hidden" value="{{$post->user_id}}" name="blocked_id">
                         <button class="block-user letter_spacing" type="submit">Block</button>
-                </form>
+                    </form>
                     <div>
                         <a href="/convo/message/{{$post->getProfilePost()->id}}"><button class="letter_spacing">Message</button></a>
                     </div>
@@ -117,4 +128,5 @@
     </div>
 </div>
 <script src="{{ asset('js/posts.js') }}"></script>
+<script src="{{ asset('js/wishlist.js') }}"></script>
 @endsection

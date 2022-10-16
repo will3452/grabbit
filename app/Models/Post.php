@@ -114,6 +114,10 @@ class Post extends Model
         $postimage = Postimage::where('post_id', $this->id)->get();
         return $postimage;
     }
+    public function checkWishlist(){
+        $wishlist = Wishlist::whereUserId(auth()->id())->wherePostId($this->id)->exists();
+        return $wishlist;
+    }
     public function reports(){
 
         return $this->morphToMany(Report::class, 'reported');

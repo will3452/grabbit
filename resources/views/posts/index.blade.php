@@ -51,6 +51,17 @@
                                     </button>
                                 @endif
                             </form>
+                            <form class="wishlist" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{$post->id}}" name="post_id">
+                                <button class="wishlist-user letter_spacing" type="submit">
+                                    @if ($post->checkWishlist())
+                                        Remove To Wishlist
+                                    @else
+                                        Add To Wishlist
+                                    @endif
+                                </button>
+                           </form>
                             <form class="blockform" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{$post->user_id}}" name="blocked_id">
@@ -129,4 +140,5 @@
         {{$posts->links()}}
     </div>
     <script src="{{ asset('js/posts.js') }}"></script>
+    <script src="{{ asset('js/wishlist.js') }}"></script>
 @endsection
