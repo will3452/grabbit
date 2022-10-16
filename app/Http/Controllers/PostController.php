@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Follow;
 use App\Models\Meetup;
 use App\Models\Comment;
+use App\Models\Profile;
 use App\Models\Postimage;
 use App\Models\Notification;
 use Illuminate\Http\Request;
-
 use function Symfony\Component\VarDumper\Dumper\esc;
 
 class PostController extends Controller
@@ -17,25 +19,45 @@ class PostController extends Controller
     public function index (Request $request) {
         $posts = new Post;
         $data = $request->search;
-        $data = null;
-        $postslist = Post::latest()->get();
-        $postarr = [];
-        // $followarr = [];
-        foreach($postslist as $item){
-            if(!$item->CheckUserBlock()){
-                $postarr[] = $item->id;
+        $postfollowarr = [];
+        $userIdArray = [];
+        $postnonfollowarr = [];
+        //get my followers 
+        $follow = Follow::where('Follower_id', auth()->id())->get();
+        foreach($follow as $item){
+            //get the profile / users
+            $profileId = $item->following_id;
+            $profiles = Profile::where('id', $profileId)->get();
+            foreach($profiles as $profile){
+                $userIdArray[] = $profile->user_id;
             }
         }
-        // $followarr = $posts->getUserData();
-        $postarr = $postarr;
+        if(!empty($userIdArray)){
+            $userIdArray[] = auth()->id();
+        }
+        $postfollow = Post::whereIn('user_id', $userIdArray)->latest()->get();
+        foreach($postfollow as $item){
+            if(!$item->CheckUserBlock()){
+               $postfollowarr[] = $item->id;
+            }
+        }
+        $nonfollow = Post::whereNotIn('user_id', $userIdArray)->latest()->get();
+        foreach($nonfollow as $item2){
+            if(!$item2->CheckUserBlock()){
+                $postnonfollowarr[] = $item2->id;
+            }
+        }
+        $postnonfollowarr = $postnonfollowarr;
+        $postfollowarr = $postfollowarr;
+        $collection = array_merge($postfollowarr, $postnonfollowarr); // collect of follow and unfollow profile post
+        $orderby = implode(',', $collection);
         if($data){
-            $posts = Post::where('title', 'like','%'.$data.'%')->where('status', null)->whereIn('id',$postarr)->latest()->paginate(5);
+            $posts = Post::where('title', 'like','%'.$data.'%')->where('status', null)->whereIn('id',$collection)->orderByRaw("FIELD(id, $orderby)")->paginate(10);
             return view('posts.index', compact('posts', 'data'));
         }else{
-            $posts = Post::whereIn('id',$postarr)->where('status', null)->latest()->paginate(5);
+            $posts = Post::whereIn('id',$collection)->where('status', null)->orderByRaw("FIELD(id, $orderby)")->paginate(10);
             return view('posts.index', compact('posts', 'data'));
         }
-
     }
     public function edit (Request $request) {
         $post = Post::where('id', $request->post_id)->where('user_id', auth()->user()->id)->first();
