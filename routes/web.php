@@ -134,3 +134,5 @@ Route::name('wishlist.')->middleware(['auth'])->prefix('/wishlist')->group(funct
     Route::get('/', [WishlistController::class, 'index'])->name('index');
     Route::post('/', [WishlistController::class, 'store'])->name('store');
 });
+
+Route::view('map', 'map');
