@@ -96,6 +96,7 @@ Route::name('meetup.')->middleware(['auth'])->prefix('/meetup')->group(function 
     Route::get('/request-meetup/{meetup_id}/process', [MeetupController::class, 'processmeetupview'])->name('processmeetupview');
     Route::post('/', [MeetupController::class, 'store'])->name('store');
     Route::post('/request-meetup', [MeetupController::class, 'processmeetup'])->name('processmeetup');
+    Route::get('/auto-generate-notification', [MeetupController::class, 'autogeneratenoti']);
 });
 
 

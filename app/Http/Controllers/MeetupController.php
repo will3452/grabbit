@@ -7,6 +7,7 @@ use App\Models\Notification;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Carbon;
 
 class MeetupController extends Controller
 {
@@ -264,6 +265,27 @@ class MeetupController extends Controller
                 );
             }
 
+        }
+    }
+    public function autogeneratenoti(){
+        $user = auth()->id();
+        $datenow = Carbon::now()->format('Y-m-d');
+        $datenegadd1 = date("Y-m-d", strtotime($datenow. ' + 2 day'));
+        //check if have pending meetup within 24 hours
+        $notifwithinaday = Meetup::where('requestor_id', $user)->orWhere('approver_id', $user)
+                        ->where('meetup_date', $datenegadd1)
+                        ->where('approved_at', '!=', null)->get();
+        foreach($notifwithinaday as $day){
+            Notification::create([
+                'user_id' => $day->requestor_id,
+                'remarks' => auth()->user()->name. ' notify you for your appointment in ' .$day->meetup_date,
+                'redirect_link' => route('meetup.showrequestedmeetuplist'),
+            ]);
+            Notification::create([
+                'user_id' => $day->approver_id,
+                'remarks' => 'notify you for your appointment in ' .$day->meetup_date,
+                'redirect_link' => route('meetup.showrequestmeetuplist'),
+            ]);
         }
     }
 }

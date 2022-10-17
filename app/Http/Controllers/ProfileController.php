@@ -34,7 +34,7 @@ class ProfileController extends Controller
             $posts = Post::whereUserId($profile->user_id)->where('status', null)->latest()->simplePaginate(6);
             $postsCount = Post::whereUserId($profile->user_id)->where('status', null)->count();
         }
-        $availabledate = Availability::where('date', '>' ,Carbon::now()->format('Y-m-d'))->orderBy('created_at', 'desc')->get();
+        $availabledate = Availability::where('date', '>' ,Carbon::now()->format('Y-m-d'))->where('user_id', $request->user_id)->orderBy('created_at', 'desc')->get();
         if($user->CheckUserBlock()){
             return redirect()->route('home');
         }
