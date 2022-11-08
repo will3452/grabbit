@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Post;
 use App\Models\Conversation;
 use App\Models\Notification;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
@@ -13,10 +15,10 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\AvailabilityController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +53,7 @@ Route::name('comment.')->middleware(['auth'])->prefix('/comments')->group(functi
     Route::delete('/{comment}', [CommentController::class, 'removeComment'])->name('remove');
 });
 
-
+Route::get('/update-post/{post}', [PostController::class, 'update'])->name('post.update');
 Route::name('post.')->middleware(['auth'])->prefix('/posts')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('index');
     Route::get('/create', [PostController::class, 'create'])->name('create');
@@ -135,4 +137,15 @@ Route::name('wishlist.')->middleware(['auth'])->prefix('/wishlist')->group(funct
     Route::post('/', [WishlistController::class, 'store'])->name('store');
 });
 
-Route::view('map', 'map');
+Route::get ('map', function (Request $request) {
+    try {
+        $post = Post::find($request->post);
+        return view('map', compact('post'));
+    } catch (Exception $e) {
+        return $e->getMessage();
+    }
+})->name('map');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

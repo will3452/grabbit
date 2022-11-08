@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Validator;
 use App\Models\Post;
 use App\Models\Wishlist;
+use Exception;
 use Illuminate\Http\Request;
 
 class WishlistController extends Controller
 {
     public function index(Request $request){
-        //get all my wishlist
+        try {
+            //get all my wishlist
         $wishlist = Wishlist::whereUserId(auth()->id())->latest()->get();
         $wishpostid = [];
         foreach($wishlist as $item){
@@ -39,6 +41,9 @@ class WishlistController extends Controller
         }
         $posts = Post::where('status', null)->whereIn('id', $postarry)->orderByRaw("FIELD(id, $ordis)")->get();
         return view('wishlist.index', compact('posts'));
+        } catch (Exception $e) {
+            return 'No post found.';
+        }
     }
     public function store(Request $request){
         $data = Validator::make($request->all(),
@@ -70,7 +75,7 @@ class WishlistController extends Controller
                     ]
                 );
             }
-             
+
         }
     }
 }

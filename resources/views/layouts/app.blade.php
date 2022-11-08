@@ -49,6 +49,7 @@
       <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -64,6 +65,7 @@
 
 @livewireStyles
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="/js/app.js" defer></script>
 </head>
 
 <body>
@@ -173,7 +175,9 @@
                     {{ session()->get('success') }}
                 </div>
                 @endif
-                @yield('content')
+                <div id="app">
+                    @yield('content')
+                </div>
             </div>
         </div>
         <footer class="footer">
@@ -193,8 +197,8 @@
                     "{{$item->title}}",
                 @endforeach
             ],
-            typeSpeed: 27,
-            backSpeed: 25,
+            typeSpeed: 50,
+            backSpeed: 50,
             attr: 'placeholder',
             bindInputFocusEvents: true,
             loop: true

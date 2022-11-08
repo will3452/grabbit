@@ -18,6 +18,8 @@ class PostLivewire extends Component
     public $descriptions;
     public $images;
 
+    public $location;
+
     // public $attachments = '';
 
     public function updated($fields)
@@ -35,6 +37,7 @@ class PostLivewire extends Component
             ]
         );
     }
+
 
     public function stored(Request $request)
         {
@@ -74,7 +77,7 @@ class PostLivewire extends Component
                     'redirect_link' => route('post.show', ['post' => $this->create_post->id]),
                 ]);
             }
-            return redirect()->route('post.index')->with('success', 'Post added!');
+            return redirect()->route('map', ['post' => $this->create_post->id, 'read' => false]);
         }
     public function render()
     {

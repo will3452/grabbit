@@ -8,7 +8,7 @@
                 @error('title')
                     {{$message}}
                 @enderror
-                
+
             </div>
         </div>
 
@@ -35,7 +35,7 @@
         <div class="form-group mt-4">
             <button type="submit" wire:loading.attr="disabled" wire:loading.class="images" class="btn btn-outline-primary w-100 p-2">
                 <div wire:loading.remove wire:target="stored">
-                    Post
+                    Next
                 </div>
                 <div wire:loading wire:target="stored">
                     Processing...

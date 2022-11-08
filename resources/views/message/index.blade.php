@@ -16,6 +16,5 @@
 @endsection
 
 @section('content')
-
     @livewire('message-livewire', ['read_by' => $data['read_by'], 'created_by' => $data['created_by']])
 @endsection

@@ -11,18 +11,20 @@ use App\Models\Comment;
 use App\Models\Profile;
 use App\Models\Postimage;
 use App\Models\Notification;
+use Exception;
 use Illuminate\Http\Request;
 use function Symfony\Component\VarDumper\Dumper\esc;
 
 class PostController extends Controller
 {
     public function index (Request $request) {
+       try {
         $posts = new Post;
         $data = $request->search;
         $postfollowarr = [];
         $userIdArray = [];
         $postnonfollowarr = [];
-        //get my followers 
+        //get my followers
         $follow = Follow::where('Follower_id', auth()->id())->get();
         foreach($follow as $item){
             //get the profile / users
@@ -58,6 +60,9 @@ class PostController extends Controller
             $posts = Post::whereIn('id',$collection)->where('status', null)->orderByRaw("FIELD(id, $orderby)")->paginate(10);
             return view('posts.index', compact('posts', 'data'));
         }
+       } catch(Exception $error) {
+        return $error->getMessage();
+       }
     }
     public function edit (Request $request) {
         $post = Post::where('id', $request->post_id)->where('user_id', auth()->user()->id)->first();
@@ -98,6 +103,23 @@ class PostController extends Controller
                     'deletepost' => $data['post_id'],
                 ]
             );
+        }
+    }
+
+    public function update(Request $request, Post $post) {
+        try {
+
+            if ($post->user_id != auth()->id()) {
+                throw new Exception('Your\' not authorized to update this record!');
+            }
+
+
+            $post->update(['lat' => $request->lat, 'lng' => $request->lng]);
+
+            return redirect(route('post.index'))->with(['success' => 'posted successfully']);
+
+         } catch(Exception $e) {
+            $e->getMessage();
         }
     }
 }

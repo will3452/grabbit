@@ -14,6 +14,8 @@ class Post extends Model
         'title',
         'descriptions',
         'attachments',
+        'lat',
+        'lng',
     ];
 
     public function checkLikeByUser(){ //check if user already like
